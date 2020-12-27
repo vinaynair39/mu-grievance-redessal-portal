@@ -1,0 +1,38 @@
+UserTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: UserTable-${self:provider.stage}
+    BillingMode: PAY_PER_REQUEST
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: userType
+        AttributeType: S
+      - AttributeName: email
+        AttributeType: S
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: emailGSI
+        KeySchema:
+          - AttributeName: email
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+      - IndexName: userTypeGSI
+        KeySchema:
+          - AttributeName: userType
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+
+Outputs:
+  UserTableArn:
+    Value: ${self:custom.UserTable.arn}
+    Export:
+      Name: UserTable-${self:provider.stage}-Arn
+  UserTableName:
+    Value: UserTable-${self:provider.stage}
+    Export:
+      Name: UserTable-${self:provider.stage}-Name

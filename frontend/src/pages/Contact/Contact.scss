@@ -1,0 +1,75 @@
+.Contact {
+	height: 100vh;
+	overflow-x: hidden;
+}
+.Contact__content {
+	margin: 20px 100px 20px 100px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 10vh;
+}
+
+.Contact__map {
+	border: 1px solid rgb(206, 201, 201);
+	display: flex;
+	justify-content: center;
+	img {
+		height: 440px;
+		width: 400px;
+	}
+	margin-right: 30px;
+}
+
+.Contact__address {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 20px;
+	flex-wrap: wrap;
+}
+
+.Contact__add1 {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	border: 1px solid rgb(189, 186, 186);
+	border-radius: 8px;
+	margin: 10px;
+
+	p {
+		font-size: 25px;
+	}
+}
+
+.Contact__add2 {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	border: 1px solid rgb(189, 186, 186);
+	border-radius: 8px;
+	margin: 10px;
+
+	p {
+		font-size: 25px;
+	}
+}
+
+.Contact__location {
+	height: 20px;
+	width: 20px;
+}
+
+@media screen and (max-width: 1760px) {
+	.Contact__map {
+		margin-right: 0px;
+		margin: 10vh 0;
+		order: 2;
+	}
+
+	.Contact__address {
+		order: 1;
+	}
+}

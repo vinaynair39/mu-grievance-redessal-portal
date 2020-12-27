@@ -1,0 +1,24 @@
+.Filters {
+  display: flex;
+  margin-top: 4vh;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
+}
+
+.Filters__radio {
+  margin-left: 3rem;
+  @media screen and (max-width: 600px) {
+    margin: 2rem 0 0.5rem 0;
+  }
+}
+.SearchBar {
+  .ant-input-group {
+    @media screen and (max-width: 600px) {
+      width: 60vw;
+    }
+    width: 30vw;
+  }
+}

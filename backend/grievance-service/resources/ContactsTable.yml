@@ -1,0 +1,11 @@
+ContactsTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: ContactsTable-${self:provider.stage}
+    BillingMode: PAY_PER_REQUEST
+    AttributeDefinitions:
+      - AttributeName: collegeName
+        AttributeType: S
+    KeySchema:
+      - AttributeName: collegeName
+        KeyType: HASH

@@ -1,0 +1,79 @@
+@import "../../media";
+.CommitteeForm {
+  height: 100%;
+
+  .ant-form {
+    @include media("<tablet") {
+      width: 85vw;
+    }
+  }
+  .CommitteeForm__grid {
+    display: grid;
+    height: 80vh;
+    grid-template-columns: 1.5fr 1fr;
+    justify-content: center;
+    align-items: center;
+    @include media("<desktop") {
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      height: 100%;
+    }
+    & img {
+      justify-self: center;
+      height: 60vh;
+    }
+    .ant-row {
+      margin-bottom: 2vh;
+    }
+
+    .ant-select {
+      margin-top: 2vh;
+    }
+  }
+
+  .CommitteeForm__register {
+    display: flex;
+    justify-content: center;
+    padding-top: 3vh;
+    .ant-btn {
+      min-height: 5vh;
+      min-width: 5vw;
+      font-size: 1.8vh;
+      // @include media("<tablet") {
+      // 	height: 8vh;
+      // 	width: 20vw;
+      // }
+    }
+  }
+
+  .CommitteeForm__background {
+    display: flex;
+    justify-content: center;
+    img {
+      height: 35vh;
+      margin-bottom: 10vh;
+      border-radius: 4px;
+      @include media("<desktop") {
+        width: 70%;
+        margin: 3vh 0;
+      }
+    }
+  }
+
+  .ant-input-affix-wrapper {
+    margin-top: 2vh;
+    border-radius: 3px;
+    width: 25vw;
+    @include media("<desktop") {
+      display: flex;
+      margin-top: 0;
+      width: 100%;
+    }
+  }
+
+  .ant-form-item-label {
+    margin-top: 2vh;
+    margin-right: 0.5rem;
+  }
+}

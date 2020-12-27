@@ -1,0 +1,55 @@
+@import "../../media";
+.UnderProcess {
+  & h1 {
+    padding-top: 2vh;
+    text-align: center;
+    margin-bottom: 4vh;
+    font-size: 4vh;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: darken(#6d7d8b, 20%);
+    font-weight: 300;
+    @include media("<tablet") {
+      margin-bottom: 2vh;
+    }
+  }
+  .ant-table {
+    display: block;
+
+    @include media("<tablet") {
+      .ant-table-cell {
+        margin-bottom: 4vh;
+      }
+      &-thead {
+        display: none;
+      }
+
+      &-thead > tr,
+      &-tbody > tr {
+        th,
+        td {
+          &:first-of-type {
+            padding-top: 1rem;
+          }
+
+          &:last-of-type {
+            padding-bottom: 1rem;
+          }
+        }
+
+        > th,
+        > td {
+          display: block;
+          width: auto !important;
+          border: none;
+          padding: 0 1rem;
+          font-size: 1.1rem;
+
+          &:last-child {
+            border-bottom: 1px solid #eee;
+          }
+        }
+      }
+    }
+  }
+}

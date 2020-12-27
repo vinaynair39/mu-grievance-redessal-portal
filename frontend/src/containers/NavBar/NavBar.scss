@@ -1,0 +1,63 @@
+@import "../../media";
+
+.NavBar {
+  display: flex;
+  background-color: #25313c;
+  width: 100vw;
+  height: 8vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 6vw;
+  @include media("<tablet") {
+    padding: 0 6vw;
+  }
+  .NavBar__logo {
+    display: flex;
+    align-items: center;
+    & img {
+      height: 5vh;
+      margin-bottom: 0.3vh;
+      @include media("<tablet") {
+        margin: 0;
+      }
+      // position: relative;
+      // z-index: 12;
+    }
+    & span {
+      color: rgba(#fff, 0.9);
+      font-size: 3vh;
+      margin-left: 2vw;
+      margin-top: 0.7vh;
+      font-weight: 100;
+    }
+    margin-bottom: 0.2vh;
+  }
+
+  .ant-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 10vh;
+    margin-bottom: 5vh;
+  }
+  .ant-menu-submenu {
+    margin: 2.5vh 0;
+  }
+  .ant-menu-vertical {
+    border: none;
+  }
+
+  .ant-drawer-body {
+    margin-top: 5vh;
+    padding: 0;
+  }
+}
+
+.NavBar__hamburger {
+  position: relative;
+  z-index: 11;
+  right: -3.5vw;
+  @include media(">=tablet") {
+    display: none;
+  }
+}

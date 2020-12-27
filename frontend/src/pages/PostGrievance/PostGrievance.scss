@@ -1,0 +1,69 @@
+@import "../../media";
+
+.PostGrievance {
+  padding: 4vh 10vw;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-items: center;
+  .steps {
+    display: flex;
+  }
+  @include media("<tablet") {
+    padding: 5vh 7vw;
+    .grievance_wrapper-steps {
+      .ant-steps-horizontal.ant-steps-label-horizontal {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .ant-steps-item-container {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+  .heading {
+    & h1 {
+      padding-top: 2vh;
+      text-align: center;
+      font-size: 4vh;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #3f5366;
+      font-weight: 300;
+      @include media("<tablet") {
+        margin: 1vh 0 2vh 0;
+        font-size: 3vh;
+      }
+    }
+  }
+
+  .flex-button {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .form-label {
+    display: block;
+    padding: 0.3rem 1rem;
+    @include media("<tablet") {
+      padding: 0;
+    }
+  }
+
+  .ant-form label {
+    padding-bottom: 2px;
+  }
+  .ant-form-item-label > label {
+    height: fit-content;
+  }
+  .ant-form-item-label {
+    text-align: left;
+    white-space: normal;
+  }
+  .ant-form-item {
+    @include media("<tablet") {
+      margin-bottom: 5vh;
+    }
+  }
+}

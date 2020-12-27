@@ -1,0 +1,116 @@
+@import "../../media";
+
+.Card {
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.25);
+  margin: 1.5vh 0;
+  border-radius: 0.3rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+  @media screen and (max-width: 600px) {
+    margin: 1.5rem 2rem;
+  }
+
+  .ant-page-header-heading-title {
+    color: darken(#6d7d8b, 20%);
+    width: 75%;
+    & a {
+      color: darken(#6d7d8b, 20%);
+    }
+    @include media("<tablet") {
+      width: 100%;
+    }
+  }
+
+  .ant-page-header-heading-left {
+    width: 100%;
+    @include media("<tablet") {
+      display: grid;
+      grid-template-areas:
+        "avatar title"
+        "subtitle subtitle";
+    }
+  }
+
+  .ant-page-header-heading-sub-title {
+    @include media("<tablet") {
+      grid-area: subtitle;
+    }
+  }
+
+  div.ant-typography,
+  .ant-typography p {
+    margin-bottom: 1em;
+    width: 85%;
+    @media screen and (min-width: 1400px) {
+      width: 90%;
+    }
+    @include media("<tablet") {
+      display: none;
+    }
+  }
+
+  .ant-page-header-heading-extra {
+    @include media("<tablet") {
+      width: 100%;
+      display: flex;
+      margin-top: 3vh;
+      justify-content: space-evenly;
+    }
+  }
+
+  .Card__docs {
+    @include media("<tablet") {
+      display: flex;
+      flex-direction: column;
+      & a:first-child {
+        margin: 3vh 0;
+      }
+    }
+  }
+}
+.Card .image {
+  margin: 0 0 0 60px;
+  display: flex;
+  align-items: center;
+}
+
+.Card .ant-page-header-rtl .image {
+  margin: 0 60px 0 0;
+}
+
+.Card .example-link {
+  line-height: 24px;
+  margin-right: 16px;
+}
+[data-theme="compact"] .Card .example-link {
+  line-height: 20px;
+}
+.Card .example-link-icon {
+  margin-right: 8px;
+}
+
+[data-theme="compact"] .Card .example-link-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.Card .ant-page-header-rtl .example-link {
+  float: right;
+  margin-right: 0;
+  margin-left: 16px;
+}
+.Card .ant-page-header-rtl .example-link-icon {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+  .Card .image {
+    flex: 100%;
+    margin: 24px 0 0;
+  }
+}

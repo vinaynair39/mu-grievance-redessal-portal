@@ -1,0 +1,17 @@
+UserBucket:
+  Type: AWS::S3::Bucket
+  Properties:
+    BucketName: ${self:custom.UserBucket.name}
+
+UserBucketPolicy:
+  Type: AWS::S3::BucketPolicy
+  Properties:
+    Bucket: !Ref UserBucket
+    PolicyDocument:
+      Statement:
+        - Sid: PublicRead
+          Effect: Allow
+          Principal: "*"
+          Action:
+            - s3:GetObject
+          Resource: arn:aws:s3:::${self:custom.UserBucket.name}/*

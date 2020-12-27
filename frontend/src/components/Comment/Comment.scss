@@ -1,0 +1,15 @@
+@import "../../media";
+
+.Comment {
+  .ant-comment {
+    width: 50vw;
+    .ant-comment-avatar img {
+      width: 2.2rem;
+      height: 5vh;
+    }
+
+    @include media("<tablet") {
+      width: 90vw;
+    }
+  }
+}

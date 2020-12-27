@@ -1,0 +1,28 @@
+GrievanceTable:
+  Type: AWS::DynamoDB::Table
+  Properties:
+    TableName: GrievanceTable-${self:provider.stage}
+    BillingMode: PAY_PER_REQUEST
+    AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      - AttributeName: status
+        AttributeType: S
+      - AttributeName: authorEmail
+        AttributeType: S
+    KeySchema:
+      - AttributeName: id
+        KeyType: HASH
+    GlobalSecondaryIndexes:
+      - IndexName: statusGSI
+        KeySchema:
+          - AttributeName: status
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL
+      - IndexName: authorEmailGSI
+        KeySchema:
+          - AttributeName: authorEmail
+            KeyType: HASH
+        Projection:
+          ProjectionType: ALL

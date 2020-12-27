@@ -1,0 +1,199 @@
+service: mugs-grievance-service
+app: mugs
+org: vinaynairr39
+frameworkVersion: "2"
+useDotenv: true
+
+plugins:
+  - serverless-bundle
+  - serverless-pseudo-parameters
+  - serverless-export-env
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: ap-south-1
+  apiGateway:
+    shouldStartNameWithService: true
+  environment:
+    GRIEVANCE_TABLE_NAME: ${self:custom.GrievanceTable.name}
+    CONTACTS_TABLE_NAME: ${self:custom.ContactsTable.name}
+    MAIL_QUEUE_URL: ${self:custom.MailQueue.url}
+    MAIL_QUEUE_ARN: ${self:custom.MailQueue.arn}
+    GRIEVANCE_BUCKET_NAME: ${self:custom.GrievanceBucket.name}
+    USER_TABLE_NAME: ${self:custom.UserTable.name}
+    USER_TABLE_ARN: ${self:custom.UserTable.arn}
+    GRIEVANCE_SERVICE_AWS_REGION: ${self:provider.region}
+    ZOOM_API_KEY: ${file(./config/envVars.js):getEnvVars.ZOOM_API_KEY}
+    ZOOM_API_SECRET: ${file(./config/envVars.js):getEnvVars.ZOOM_API_SECRET}
+    ZOOM_API_EMAIL: ${file(./config/envVars.js):getEnvVars.ZOOM_API_EMAIL}
+
+  iamRoleStatements:
+    - ${file(iam/GrievanceTableIAM.yml):GrievanceTableIAM}
+    - ${file(iam/ContactsTableIAM.yml):ContactsTableIAM}
+    - ${file(iam/UserTableIAM.yml):UserTableIAM}
+    - ${file(iam/MailQueueIAM.yml):MailQueueIAM}
+    - ${file(iam/GrievanceBucketIAM.yml):GrievanceBucketIAM}
+
+resources:
+  Resources:
+    GrievanceTable: ${file(resources/GrievanceTable.yml):GrievanceTable}
+    ContactsTable: ${file(resources/ContactsTable.yml):ContactsTable}
+    GrievanceBucket: ${file(resources/GrievanceBucket.yml):GrievanceBucket}
+    GrievanceBucketPolicy: ${file(resources/GrievanceBucket.yml):GrievanceBucketPolicy}
+
+functions:
+  createGrievance:
+    handler: src/lambdas/createGrievance.handler
+    events:
+      - http:
+          method: POST
+          path: /grievance/create
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  updateGrievance:
+    handler: src/lambdas/updateGrievance.handler
+    events:
+      - http:
+          method: PUT
+          path: /grievance/update/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  getGrievances:
+    handler: src/lambdas/getGrievances.handler
+    events:
+      - http:
+          method: GET
+          path: /grievance
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  getGrievancesByEmail:
+    handler: src/lambdas/getGrievancesByEmail.handler
+    events:
+      - http:
+          method: GET
+          path: /grievance/student
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  getGrievance:
+    handler: src/lambdas/getGrievance.handler
+    events:
+      - http:
+          method: GET
+          path: /grievance/{id}
+          # authorizer: ${self:custom.authorizer}
+          cors: true
+
+  selectGrievance:
+    handler: src/lambdas/selectGrievance.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/select/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  rejectGrievance:
+    handler: src/lambdas/rejectGrievance.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/reject/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  allocateDate:
+    handler: src/lambdas/allocateDate.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/date/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  addComment:
+    handler: src/lambdas/addComment.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/comment/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  invitePrincipalForMeeting:
+    handler: src/lambdas/invitePrincipalForMeeting.handler
+    events:
+      - http:
+          method: PUT
+          path: /grievance/invite
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  sendResolution:
+    handler: src/lambdas/sendResolution.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/resolution/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  sendATR:
+    handler: src/lambdas/sendATR.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/atr/{id}
+          authorizer: ${self:custom.authorizer}
+          cors: true
+
+  principalActions:
+    handler: src/lambdas/principalActions.handler
+    events:
+      - http:
+          method: PATCH
+          path: /grievance/principal/{id}
+          cors: true
+
+  getEmailOfPrincipal:
+    handler: src/lambdas/getEmailOfPrincipal.handler
+    events:
+      - http:
+          method: GET
+          path: /grievance/email/{collegeName}
+          cors: true
+
+  getStats:
+    handler: src/lambdas/getStats.handler
+    events:
+      - http:
+          method: GET
+          path: /grievance/stats
+          cors: true
+
+custom:
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${self:provider.stage}-auth
+  GrievanceTable:
+    name: !Ref GrievanceTable
+    arn: !GetAtt GrievanceTable.Arn
+  ContactsTable:
+    name: !Ref ContactsTable
+    arn: !GetAtt ContactsTable.Arn
+  UserTable:
+    arn: ${cf:mugs-user-service-${self:provider.stage}.UserTableArn}
+    name: ${cf:mugs-user-service-${self:provider.stage}.UserTableName}
+  MailQueue:
+    arn: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueArn}
+    url: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueUrl}
+
+  GrievanceBucket:
+    name: grievance-bucket-8282-${self:provider.stage}
+
+  export-env:
+    filename: .env.test

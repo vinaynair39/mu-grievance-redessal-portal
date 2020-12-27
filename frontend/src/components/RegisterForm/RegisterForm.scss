@@ -1,0 +1,62 @@
+@import "../../media";
+
+.RegisterForm {
+  min-height: 51vh;
+  min-width: 22vw;
+  width: fit-content;
+  height: fit-content;
+  @include media("<tablet") {
+    width: 100vw;
+    height: 70vh;
+    box-shadow: none;
+  }
+  border-radius: 10px;
+  padding: 2vh 5vh 1vh 5vh;
+  box-shadow: 2px 1px 10px rgba(0, 0, 0, 0.25);
+  & h1 {
+    font-size: 7vh;
+    color: #3f5366;
+    text-align: center;
+    margin-bottom: 3vh;
+    @include media("<tablet") {
+      margin-bottom: 5vh;
+    }
+  }
+  .ant-input-affix-wrapper {
+    border-radius: 3px;
+    @include media("<tablet") {
+      margin-top: 1vh;
+    }
+  }
+  .RegisterForm__submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
+    .ant-btn {
+      min-height: 4.5vh;
+      min-width: 5vw;
+      font-size: 1.8vh;
+    }
+    margin-bottom: 3vh;
+    @include media("<tablet") {
+      margin-top: 6vh;
+    }
+  }
+  .RegisterForm__register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h5 {
+      color: #3f5366;
+      margin: 0;
+    }
+    button {
+      color: #3bb2ac;
+      background-color: transparent;
+      border: none;
+      padding: 0;
+    }
+  }
+}

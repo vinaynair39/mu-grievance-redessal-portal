@@ -1,0 +1,29 @@
+@import "../../media";
+
+.Step {
+  margin-top: 4vh;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  @include media("<tablet") {
+    margin-top: 2vh;
+  }
+  .blocks {
+    display: flex;
+    justify-content: space-around;
+    @include media("<tablet") {
+      flex-direction: column;
+      height: fit-content;
+    }
+  }
+  .block {
+    width: 30vw;
+    @include media("<tablet") {
+      width: 100%;
+    }
+  }
+
+  .ant-input-prefix {
+    margin-right: 6px;
+  }
+}

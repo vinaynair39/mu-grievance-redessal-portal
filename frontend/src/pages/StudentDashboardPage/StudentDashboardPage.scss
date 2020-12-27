@@ -1,0 +1,73 @@
+@import "../../media";
+.StudenntDashboardPage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  @include media("<tablet") {
+    height: 92vh;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .StudenntDashboardPage__buttons {
+    display: flex;
+    & h1 {
+      font-size: 4vh;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      color: #3f5366;
+      @include media("<tablet") {
+        font-size: 3vh;
+      }
+    }
+    @include media("<tablet") {
+      flex-direction: column;
+      justify-content: space-around;
+      height: 90vh;
+    }
+    .StudenntDashboardPage__button1 {
+      height: 50vh;
+      width: 38vw;
+      & h1 {
+        padding-top: 1vh;
+      }
+      transition: all 0.2s;
+      @include media("<tablet") {
+        width: 100vw;
+        height: 30vh;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    .StudenntDashboardPage__button2 {
+      height: 68vh;
+      width: 38vw;
+
+      position: relative;
+      z-index: 2;
+      top: -9vh;
+      transition: all 0.2s;
+      @include media("<tablet") {
+        width: 100vw;
+        height: 45vh;
+        position: static;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      & h1 {
+        position: relative;
+        z-index: 100;
+        top: -8vh;
+        @include media("<tablet") {
+          top: -5vh;
+        }
+      }
+    }
+  }
+}

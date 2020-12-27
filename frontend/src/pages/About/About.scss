@@ -1,0 +1,42 @@
+.About {
+  min-height: 100vh;
+  height: 100%;
+}
+.About__header {
+  h1 {
+    margin: 8vh 0;
+    text-align: center;
+    font-size: 4vh;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: darken(#6d7d8b, 20%);
+  }
+}
+
+.About__imagebox {
+  display: flex;
+  justify-content: center;
+  height: 60vh;
+  .About__images {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
+.CommitteeCard {
+  width: 20vw;
+  text-align: center;
+  & img {
+    width: 16vw;
+    height: 46vh;
+    border-radius: 4px;
+  }
+  .info {
+    h2 {
+      padding-top: 1rem;
+      margin: 0;
+      font-size: 3vh;
+    }
+  }
+}

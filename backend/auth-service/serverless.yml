@@ -1,0 +1,68 @@
+service: mugs-auth-service
+app: mugs
+org: vinaynairr39
+frameworkVersion: "2"
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 128
+  apiGateway:
+    shouldStartNameWithService: true
+  stage: ${opt:stage, 'dev'}
+  region: ap-south-1
+  environment:
+    ZOOM_API_KEY: ${file(./config/envVars.js):getEnvVars.ZOOM_API_KEY}
+    ZOOM_API_SECRET: ${file(./config/envVars.js):getEnvVars.ZOOM_API_SECRET}
+
+plugins:
+  - serverless-bundle
+functions:
+  auth:
+    handler: src/lambdas/auth.handler
+
+  publicEndpoint:
+    handler: src/lambdas/public.handler
+    events:
+      - http:
+          path: public
+          method: POST
+          cors: true
+
+  privateEndpoint:
+    handler: src/lambdas/private.handler
+    events:
+      - http:
+          path: private
+          method: POST
+          authorizer: auth
+          cors: true
+
+resources:
+  Resources:
+    # This response is needed for custom authorizer failures cors support ¯\_(ツ)_/¯
+    GatewayResponse:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: EXPIRED_TOKEN
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+        StatusCode: "401"
+    AuthFailureGatewayResponse:
+      Type: "AWS::ApiGateway::GatewayResponse"
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: UNAUTHORIZED
+        RestApiId:
+          Ref: "ApiGatewayRestApi"
+        StatusCode: "401"
+
+custom:
+  bundle:
+    linting: false

@@ -1,0 +1,11 @@
+{
+  "name": "mugs-auth-service",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  },
+  "devDependencies": {
+    "serverless-bundle": "^4.0.1"
+  }
+}

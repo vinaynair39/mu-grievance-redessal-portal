@@ -1,0 +1,33 @@
+@import "../../media";
+
+.dispTable__edit {
+  width: 100%;
+  .ant-tag {
+    font-size: calc(7px + (10 - 7) * ((100vw - 300px) / (1600 - 300)));
+    @include media("<tablet") {
+      font-size: calc(9px + (10 - 7) * ((100vw - 300px) / (1600 - 300)));
+    }
+  }
+
+  .ant-table {
+    th {
+      font-size: calc(12px + (18 - 12) * ((100vw - 300px) / (1600 - 300)));
+    }
+    @include media("<tablet") {
+      th {
+        font-size: calc(15px + (18 - 12) * ((100vw - 300px) / (1600 - 300)));
+      }
+    }
+    td {
+      font-size: calc(10px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
+    }
+    @include media("<tablet") {
+      td {
+        font-size: calc(14px + (16 - 10) * ((100vw - 300px) / (1600 - 300)));
+      }
+    }
+  }
+  & button {
+    cursor: pointer;
+  }
+}

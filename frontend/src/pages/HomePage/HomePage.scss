@@ -1,0 +1,39 @@
+@import "../../media";
+.HomePage {
+  height: 100vh;
+  overflow: hidden;
+  .HomePage__content {
+    @include media("<tablet") {
+      height: 90vh;
+      justify-content: center;
+      padding: 0 1vw;
+    }
+    padding: 0 8vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 92vh;
+  }
+  .HomePage__bg {
+    text-align: center;
+    @include media("<tablet") {
+      display: none;
+    }
+    h1 {
+      color: #3f5366;
+      font-size: 5vh;
+      letter-spacing: 2px;
+      margin-bottom: 6vh;
+    }
+    svg {
+      height: 52vh;
+      width: 45vw;
+    }
+    height: 76vh;
+  }
+  .HomePage__form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

@@ -1,0 +1,46 @@
+@import "../../media";
+
+.Loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  // background: rgba(0, 0, 0, 0.7);
+  transition: all 0.1s ease;
+  @include media("<tablet") {
+    height: 90vh;
+  }
+}
+
+.Loader__completed {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+
+  & h1 {
+    font-size: 5vh;
+    position: relative;
+    top: 8vh;
+
+    @include media("<desktop") {
+      top: 2vh;
+      font-size: 4vh;
+    }
+    color: darken(#6d7d8b, 20%);
+  }
+  .Loader__completed-animation {
+    width: 40vw;
+    @include media("<tablet") {
+      width: 100vw;
+    }
+  }
+}

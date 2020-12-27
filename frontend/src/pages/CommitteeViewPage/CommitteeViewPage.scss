@@ -1,0 +1,10 @@
+.CommitteeViewPage {
+  padding-top: 2vh;
+  & h1 {
+    color: darken(#6d7d8b, 20%);
+    font-size: 4vh;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+  }
+}

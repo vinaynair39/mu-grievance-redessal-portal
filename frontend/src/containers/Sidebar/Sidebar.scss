@@ -1,0 +1,36 @@
+.SideBar-logo {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    & img {
+        height: 7vh;
+    }
+}
+.SideBar-profile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1.5rem 1rem 0 1rem;
+    & img {
+        height: 10vh;
+        border-radius: 50%;
+        width: 5vw;
+    }
+    & span {
+        padding-top: 0.2rem;
+        color: #5a6270;
+    }
+}
+
+// .ant-menu-submenu > .ant-menu {
+//     background: #000c17;
+// }
+
+// .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+//     background-color: #1890FF;
+// }
+
+.ant-menu-dark.ant-menu-inline .ant-menu-item {
+    margin-bottom: 3vh;
+}

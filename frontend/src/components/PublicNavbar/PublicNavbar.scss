@@ -1,0 +1,147 @@
+@import "../../media";
+
+.Navbar {
+  display: flex;
+  background-color: #25313c;
+  width: 100vw;
+  height: 8vh;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8vw;
+
+  @include media("<tablet") {
+    padding: 0 7vw;
+  }
+  .Navbar__logo {
+    display: flex;
+    align-items: center;
+
+    & img {
+      height: 5vh;
+      margin-bottom: 0.3vh;
+      @include media("<tablet") {
+        margin: 0;
+      }
+      // position: relative;
+      // z-index: 12;
+    }
+    & span {
+      color: whitesmoke;
+      font-size: 2.3vh;
+      margin-left: 1vw;
+      margin-top: 0.3vh;
+      letter-spacing: 2px;
+      font-weight: lighter;
+      @include media("<tablet") {
+        margin: 0;
+        padding-left: 2vw;
+        padding-top: 0.7vh;
+      }
+    }
+    margin-bottom: 0.2vh;
+  }
+  .Navbar__links {
+    min-width: 25%;
+    width: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8vh;
+    text-transform: uppercase;
+    font-weight: 500;
+
+    @include media("<tablet") {
+      display: none;
+    }
+    a {
+      @include media("<tablet") {
+      }
+      position: relative;
+      color: white;
+      font-size: 1.5;
+      font-weight: 500;
+      letter-spacing: 1px;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 1px;
+        transform: scaleX(0);
+        background-color: #3bb2ac;
+        transition: transform 0.3s;
+      }
+      &:hover {
+        &:after {
+          transform: scaleX(1);
+        }
+      }
+    }
+    a:hover {
+      transform: scale(1);
+    }
+
+    & .active {
+      color: #3bb2ac;
+    }
+  }
+
+  .Navbar__links-opened {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 100vh;
+    background-color: #1e2429;
+    animation-name: navdown;
+    animation-duration: 0.5s;
+    transition: all 0.5 ease;
+    a {
+      margin: 8vh;
+      font-size: 3.5vh;
+      color: white;
+    }
+    & .active {
+      color: #3bb2ac;
+    }
+  }
+  .Navbar__hamburger {
+    position: relative;
+    z-index: 11;
+    right: -3.5vw;
+    transition: all 0.5 ease;
+
+    @include media(">=tablet") {
+      display: none;
+    }
+  }
+}
+@keyframes navdown {
+  from {
+    opacity: 0;
+    height: 8vh;
+  }
+  to {
+    opacity: 1;
+    height: 100vh;
+  }
+}
+
+@keyframes navup {
+  from {
+    opacity: 1;
+    height: 100vh;
+  }
+  to {
+    opacity: 0;
+    height: 8vh;
+  }
+}

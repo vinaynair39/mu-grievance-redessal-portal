@@ -1,0 +1,121 @@
+@import "../../media";
+
+.ListItem {
+  display: grid;
+  grid-template-columns: 1.7fr 0.3fr;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 1rem 2vw 0.7rem 2vw;
+  cursor: pointer;
+  border-radius: 0.3rem;
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  @include media("<tablet") {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0;
+    padding: 2vh;
+  }
+}
+
+.ListItem__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include media("<tablet") {
+    justify-content: center;
+  }
+}
+
+.ListItem__content-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #3f5366;
+  margin-bottom: 1.5rem;
+}
+
+.ListItem__content-time {
+  color: #5a6270;
+  // letter-spacing: 0.1em;
+  align-self: flex-end;
+  margin-bottom: 1px;
+  @include media("<tablet") {
+    align-self: center;
+    margin-bottom: 4vh;
+  }
+}
+
+.ListItem__content-type {
+  .label {
+    margin-right: 1vw;
+    background: #3bb2ac;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    color: white;
+  }
+}
+.ListItem__content-against {
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+
+  color: #5a6270;
+  margin-top: 1rem;
+  font-weight: normal;
+  // letter-spacing: 0.1em;
+  & span {
+    background-color: #ffc117;
+
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    color: white;
+    margin-left: 5px;
+  }
+}
+
+.ListItem__select {
+  justify-self: end;
+  svg {
+    // height: 1.5rem;
+    // width: 2rem;
+  }
+}
+
+.ListItem__content-extra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @include media("<tablet") {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .ant-checkbox-wrapper {
+      margin-bottom: 4vh;
+    }
+  }
+}
+
+.ListItem__content-status {
+  margin-top: 1rem;
+  font-weight: normal;
+  // letter-spacing: 0.1em;
+  color: #5a6270;
+
+  & span {
+    color: white;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    margin-left: 5px;
+    background-color: #ffd36a;
+  }
+}

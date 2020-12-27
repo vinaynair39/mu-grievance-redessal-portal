@@ -1,0 +1,12 @@
+.SelectedPage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.SelectedPage__filters {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	width: 100%;
+	padding: 5vh 5vw 0 5vw;
+}

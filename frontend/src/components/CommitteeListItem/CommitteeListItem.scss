@@ -1,0 +1,48 @@
+.CommitteeListItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 40vh;
+  width: 15vw;
+  color: #5a6270;
+  @media screen and (max-width: 700px) {
+    justify-content: center;
+    width: 70vw;
+    margin: 0;
+    margin-bottom: 2rem;
+  }
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 2rem;
+  -webkit-box-shadow: 0px 1px 3px 0px #aaaaaa;
+  -moz-box-shadow: 0px 1px 3px 0px #aaaaaa;
+  box-shadow: 0px 1px 4px 1px #ccc;
+  transition: all 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.CommitteeListItem__image {
+  & img {
+    margin-top: 1rem;
+    height: 25vh;
+    max-width: 100%;
+    border-radius: 5px;
+  }
+}
+
+.CommitteeListItem__info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  p {
+    font-size: 3vh;
+    margin: 0;
+    &:last-of-type {
+      font-size: 2.5vh;
+    }
+  }
+}

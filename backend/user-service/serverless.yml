@@ -1,0 +1,140 @@
+service: mugs-user-service
+app: mugs
+org: vinaynairr39
+frameworkVersion: "2"
+useDotenv: true
+
+plugins:
+  - serverless-bundle
+  - serverless-export-env
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  memorySize: 256
+  apiGateway:
+    shouldStartNameWithService: true
+  stage: ${opt:stage, 'dev'}
+  region: ap-south-1
+  environment:
+    USER_TABLE_NAME: ${self:custom.UserTable.name}
+    MAIL_QUEUE_URL: ${self:custom.MailQueue.url}
+    MAIL_QUEUE_ARN: ${self:custom.MailQueue.arn}
+    USER_BUCKET_NAME: ${self:custom.UserBucket.name}
+    USER_SERVICE_AWS_REGION: ${self:provider.region}
+    ZOOM_API_KEY: ${file(./config/envVars.js):getEnvVars.ZOOM_API_KEY}
+    ZOOM_API_SECRET: ${file(./config/envVars.js):getEnvVars.ZOOM_API_SECRET}
+
+  iamRoleStatements:
+    - ${file(iam/UserTableIAM.yml):UserTableIAM}
+    - ${file(iam/MailQueueIAM.yml):MailQueueIAM}
+    - ${file(iam/UserBucketIAM.yml):UserBucketIAM}
+
+resources:
+  Resources:
+    UserTable: ${file(resources/UserTable.yml):UserTable}
+    UserBucket: ${file(resources/UserBucket.yml):UserBucket}
+    UserBucketPolicy: ${file(resources/UserBucket.yml):UserBucketPolicy}
+  Outputs:
+    UserTableArn: ${file(resources/UserTable.yml):Outputs.UserTableArn}
+    UserTableName: ${file(resources/UserTable.yml):Outputs.UserTableName}
+
+functions:
+  registerUser:
+    handler: src/lambdas/registerUser.handler
+    events:
+      - http:
+          method: POST
+          path: /user/register/{userType}
+          cors: true
+
+  loginUser:
+    handler: src/lambdas/loginUser.handler
+    events:
+      - http:
+          method: POST
+          path: /user/login
+          cors: true
+
+  verifyUser:
+    handler: src/lambdas/verifyUser.handler
+    events:
+      - http:
+          method: PATCH
+          path: /user/verify
+          cors: true
+
+  forgotPassword:
+    handler: src/lambdas/forgotPassword.handler
+    events:
+      - http:
+          method: PATCH
+          path: /user/forgot/{email}
+          cors: true
+
+  getUser:
+    handler: src/lambdas/getUser.handler
+    events:
+      - http:
+          method: GET
+          path: /user/{id}
+          cors: true
+          authorizer: ${self:custom.authorizer}
+
+  resetPassword:
+    handler: src/lambdas/resetPassword.handler
+    events:
+      - http:
+          method: PATCH
+          path: /user/reset/
+          cors: true
+
+  getAllCommittee:
+    handler: src/lambdas/getAllCommittee.handler
+    events:
+      - http:
+          method: GET
+          path: /user/committee
+          cors: true
+          authorizer: ${self:custom.authorizer}
+
+  getAllCommitteePublic:
+    handler: src/lambdas/getAllCommitteePublic.handler
+    events:
+      - http:
+          method: GET
+          path: /user/committee/public
+
+  getCommittee:
+    handler: src/lambdas/getCommittee.handler
+    events:
+      - http:
+          method: GET
+          path: /user/committee/{id}
+          cors: true
+          authorizer: ${self:custom.authorizer}
+
+  updateCommittee:
+    handler: src/lambdas/updateCommittee.handler
+    events:
+      - http:
+          method: PATCH
+          path: /user/committee/{id}/update
+          cors: true
+          authorizer: ${self:custom.authorizer}
+
+custom:
+  UserTable:
+    name: !Ref UserTable
+    arn: !GetAtt UserTable.Arn
+
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${self:provider.stage}-auth
+  MailQueue:
+    arn: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueArn}
+    url: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueUrl}
+  UserBucket:
+    name: user-bucket-8282-${self:provider.stage}
+
+  export-env:
+    filename: .env.test

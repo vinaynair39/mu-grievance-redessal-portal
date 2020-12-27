@@ -1,0 +1,47 @@
+@import "../../media";
+
+.List {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  justify-content: center;
+  margin: 3vh 8vw 2vh 8vw;
+  @include media("<tablet") {
+    margin: 0 4vw 2vh 4vw;
+  }
+}
+
+.List__completed {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  @include media("<tablet") {
+    margin: 3vh 4vw 2vh 4vw;
+  }
+  & h1 {
+    font-size: 5vh;
+    position: relative;
+    top: 5vh;
+    font-size: 4vh;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: darken(#6d7d8b, 20%);
+    @include media("<desktop") {
+      top: 2vh;
+      font-size: 3vh;
+    }
+  }
+  .List__completed-animation {
+    position: relative;
+    width: 46%;
+
+    @include media("<desktop") {
+      width: 100%;
+    }
+  }
+}
+.List__pagination {
+  margin-top: 1rem;
+}
