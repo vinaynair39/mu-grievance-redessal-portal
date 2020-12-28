@@ -1,15 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Tabs, Table, message } from "antd";
+import { Tabs, Table } from "antd";
 import Lottie from "lottie-react-web";
 import animation from "assets/complete.json";
 import { ModalATR, InvitePrincipalModal } from "components/CustomModals/ModalInput";
-import { useMutation } from "react-query";
 import useWindowSize from "utils/useWindowSize";
-import { errorMessage } from "utils/modalMessage";
 import { ShowImage } from "utils/ShowImage";
-import { sendResolution } from "APIs/grievance";
-import { sendATR } from "APIs/grievance";
-import { sendInvite } from "APIs/grievance";
+
 import { underProcessGrievanceColumn } from "./columns";
 import { processedGrievanceColumn } from "./columns";
 import { ResolutionWrittenModal } from "components/CustomModals/ModalInput";
@@ -17,11 +13,22 @@ import Context from "context/context";
 
 import "./Table.scss";
 import { ScheduleNewMeetingModal } from "components/CustomModals/CustomModals";
-import { allocateDate } from "APIs/grievance";
 
 const { TabPane } = Tabs;
 
-const CustomTable = ({ heading1, heading2, data }) => {
+const CustomTable = ({
+  heading1,
+  heading2,
+  data,
+  createATRMutation,
+  createMeetingMutation,
+  createResolutionMutation,
+  createInviteMutation,
+  createResolutionLoading,
+  createATRLoading,
+  createInviteLoading,
+  createMeetingLoading,
+}) => {
   const [currentDocument, setCurrentDocument] = useState([]);
   const [showDocumentsModal, setShowDocumentsModal] = useState(false);
   const [showActionTakenReportModal, setShowActionTakenReportModal] = useState(false);
@@ -42,38 +49,6 @@ const CustomTable = ({ heading1, heading2, data }) => {
   } = useContext(Context);
 
   const { width } = useWindowSize();
-
-  const [createResolutionMutation, { isLoading: createResolutionLoading }] = useMutation(sendResolution, {
-    onSuccess: ({ data }) => {
-      message.success(data.message);
-      setShowResolutionFormModal(false);
-    },
-    onError: errorMessage,
-  });
-
-  const [createATRMutation, { isLoading: createATRLoading }] = useMutation(sendATR, {
-    onSuccess: ({ data }) => {
-      message.success(data.message);
-      setShowActionTakenReportModal(false);
-    },
-    onError: errorMessage,
-  });
-
-  const [createInviteMutation, { isLoading: createInviteLoading }] = useMutation(sendInvite, {
-    onSuccess: ({ data }) => {
-      message.success(data.message);
-      setInviteVisible(false);
-    },
-    onError: errorMessage,
-  });
-
-  const [createMeetingMutation, { isLoading: createMeetingLoading }] = useMutation(allocateDate, {
-    onSuccess: ({ data }) => {
-      message.success(data.message);
-      setShowScheduleNewMeetingModal(false);
-    },
-    onError: errorMessage,
-  });
 
   useEffect(() => {
     let dataA = [];
@@ -131,16 +106,19 @@ const CustomTable = ({ heading1, heading2, data }) => {
   const onCreateAtr = (values) => {
     const payload = values;
     createATRMutation({ id: currentGrievanceId, payload });
+    setShowActionTakenReportModal(false);
   };
 
   const onCreateResolution = (values) => {
     const payload = values;
     createResolutionMutation({ id: currentGrievanceId, payload });
+    setShowResolutionFormModal(false);
   };
 
   const inviteOfficals = async (values) => {
     const payload = values;
     createInviteMutation({ payload });
+    setInviteVisible(false);
   };
 
   return (
@@ -178,7 +156,10 @@ const CustomTable = ({ heading1, heading2, data }) => {
         visible={showScheduleNewMeetingModal}
         id={currentGrievanceId}
         authorEmail={currentGrievanceAuthorEmail}
-        onCreate={createMeetingMutation}
+        onCreate={(payload) => {
+          createMeetingMutation(payload);
+          setShowScheduleNewMeetingModal(false);
+        }}
         isLoading={createMeetingLoading}
         onCancel={() => setShowScheduleNewMeetingModal(false)}
       />

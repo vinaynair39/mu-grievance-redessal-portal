@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { MessageOutlined } from "@ant-design/icons";
 import { Form, Input, Modal } from "antd";
 
 export const ReasonModal = ({ visible = false, title, onSubmit, onCancel, loading, label, valueName }) => {

@@ -1,12 +1,9 @@
 import React from "react";
 import Navbar from "components/PublicNavbar/PublicNavbar";
-import { Card } from "antd";
-import { Typography } from "antd";
-import "./About.scss";
 import { useQuery } from "react-query";
 import { getAllCommitteePublic } from "APIs/user";
 
-const { Title } = Typography;
+import "./About.scss";
 
 const CommitteeCard = ({ imageUrl, name, designation }) => {
   return (

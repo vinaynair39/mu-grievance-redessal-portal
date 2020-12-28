@@ -34,7 +34,7 @@ const ProfilePage = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="CommitteeViewPage">
+        <div className="CommitteeViewPage animate__animated animate__fadeIn">
           <h1>Edit Profile</h1>
           <CommitteeForm onSubmit={editCommitteeMutation} edit={true} formValues={data} isLoading={editLoading} />
         </div>

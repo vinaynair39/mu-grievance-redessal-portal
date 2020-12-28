@@ -1,8 +1,8 @@
 import React from "react";
 import { Table, Tag, Button, Modal, Popconfirm } from "antd";
 import { DateTime } from "luxon";
-import useWindowSize from "utils/useWindowSize";
 import { Link, useHistory } from "react-router-dom";
+import useWindowSize from "utils/useWindowSize";
 import "./StudentTable.scss";
 
 const StudentTable = ({ studentGrievances }) => {

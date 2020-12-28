@@ -45,7 +45,7 @@ const CommitteeViewPage = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="CommitteeViewPage">
+        <div className="CommitteeViewPage animate__animated animate__fadeIn">
           <h1>{edit ? "Edit Profile" : "Add A New Member"}</h1>
           <CommitteeForm
             onSubmit={edit ? editCommitteeMutation : registerMutation}

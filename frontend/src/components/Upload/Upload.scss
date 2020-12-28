@@ -1,23 +1,37 @@
+@import "../../media";
+
 .Temp__upload {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100%;
-  border-radius: 5px;
-  padding: 1rem 1rem;
+  border-radius: 4px;
+  padding: 1vh;
   .Temp__upload-dragger {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    // .ant-upload-picture-card-wrapper {
-    //   display: flex;
-    //   margin-bottom: 3vh;
-    // }
+    width: fit-content;
   }
   .Temp__upload-comment {
     padding-top: 3vh;
     padding-bottom: 5vh;
+  }
+}
+.Temp__upload-heading {
+  & h1 {
+    padding-top: 2vh;
+    text-align: center;
+    margin-bottom: 4vh;
+    font-size: 4vh;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    color: darken(#6d7d8b, 20%);
+    font-weight: 300;
+    @include media("<tablet") {
+      margin-bottom: 2vh;
+    }
   }
 }

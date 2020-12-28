@@ -5,12 +5,12 @@ import Navbar from "components/PublicNavbar/PublicNavbar";
 import RegisterForm from "components/RegisterForm/RegisterForm";
 import LoginForm from "components/LoginForm/LoginForm";
 import Context from "context/context";
-import { ReactComponent as Bg } from "assets/bg.svg";
 import { registerUser, loginUser, setAuthorizationHeader, verifyUser } from "APIs/user";
 import { errorMessage, successMessage } from "utils/modalMessage";
 import { validObject } from "utils/validObject";
 import { OtpOnlyModal } from "components/CustomModals/CustomModals";
 import { login } from "context/actions";
+import { ReactComponent as Bg } from "assets/bg.svg";
 
 import "./HomePage.scss";
 

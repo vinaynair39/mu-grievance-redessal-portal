@@ -3,8 +3,9 @@ import { Twirl as Hamburger } from "hamburger-react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-import "./PublicNavbar.scss";
 import useWindowSize from "utils/useWindowSize";
+
+import "./PublicNavbar.scss";
 
 const Navbar = ({}) => {
   const [isOpen, setOpen] = useState(false);

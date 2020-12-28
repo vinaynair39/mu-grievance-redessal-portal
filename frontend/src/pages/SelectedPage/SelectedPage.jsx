@@ -7,10 +7,11 @@ import { successMessage, errorMessage } from "utils/modalMessage";
 import Layout from "containers/Layout/Layout";
 
 import "./SelectedPage.scss";
+import { validObject } from "utils/validObject";
 
 const SelectedPage = () => {
   const { isLoading, data, refetch } = useQuery(["getGrievances", "SELECTED"], getGrievances, {
-    onError: errorMessage,
+    onError: ({ response }) => errorMessage(validObject(response) && response.data),
   });
 
   const [allocateDateMutation, { isLoading: allocateDateLoading }] = useMutation(allocateDate, {
@@ -18,7 +19,7 @@ const SelectedPage = () => {
       successMessage(message);
       refetch();
     },
-    onError: errorMessage,
+    onError: ({ response }) => errorMessage(validObject(response) && response.data),
   });
 
   return (
@@ -26,7 +27,7 @@ const SelectedPage = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="animated fadeIn">
+        <div className="animate__animated animate__fadeIn">
           <List grievances={data} allocateDate={allocateDateMutation} isLoading={allocateDateLoading} />}
         </div>
       )}

@@ -5,7 +5,6 @@ import { Spinner } from "components/Loaders/Loaders";
 import CustomTable from "components/Table/Table";
 import { getGrievances } from "APIs/grievance";
 import { errorMessage } from "utils/modalMessage";
-// import "CommitteeMeetingPage.scss";
 
 const CommitteeMeetingPage = ({}) => {
   const { isLoading, data } = useQuery(["getGrievances", "UNDER_PROCESS"], getGrievances, {
@@ -19,7 +18,7 @@ const CommitteeMeetingPage = ({}) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className="UnderProcess animated fadeIn">
+          <div className="UnderProcess animate__animated animate__fadeIn">
             <>
               {Array.isArray(data) && data.length > 0 && <h1>Scheduled Meetings</h1>}
               <CustomTable data={data} heading1={"Meeting Pending"} heading2={"Meeting Completed"} />

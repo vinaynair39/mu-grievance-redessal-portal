@@ -6,7 +6,6 @@ import { collegeNames } from "utils/collegeNames";
 import "./CommitteeForm.scss";
 import Modal from "antd/lib/modal/Modal";
 import { getBase64 } from "utils/getBase64";
-import { Spinner } from "components/Loaders/Loaders";
 
 const CommitteeForm = ({ formValues = {}, onSubmit, edit, mutationLoading }) => {
   const [form] = Form.useForm();

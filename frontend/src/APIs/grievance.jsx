@@ -1,7 +1,24 @@
 import Axios from "axios";
+import { userBaseURL } from "./user";
+
+let baseURL = "";
+switch (process.env.NODE_ENV) {
+  case "development":
+    baseURL = process.env.REACT_APP_GRIEVANCE_SERVICE_URL_DEV;
+    break;
+  case "production":
+    baseURL = process.env.REACT_APP_GRIEVANCE_SERVICE_URL_PROD;
+    break;
+  case "test":
+    baseURL = process.env.REACT_APP_GRIEVANCE_SERVICE_URL_TEST;
+    break;
+  default:
+    baseURL = process.env.REACT_APP_GRIEVANCE_SERVICE_URL_DEV;
+    break;
+}
 
 const axios = Axios.create({
-  baseURL: `${process.env.REACT_APP_GRIEVANCE_SERVICE_URL_}${process.env.NODE_ENV.toUpperCase()}`,
+  baseURL,
 });
 
 export const setAuthorizationHeaderForGrievanceService = (token) => {
@@ -38,6 +55,7 @@ export const getGrievanceStats = async () => {
 };
 
 export const allocateDate = async ({ id, payload }) => await axios.patch(`/grievance/date/${id}`, payload);
+
 export const addComment = async ({ id, payload }) => await axios.patch(`/grievance/comment/${id}`, payload);
 
 export const selectGrievance = async (id) => await axios.patch(`/grievance/select/${id}`);
@@ -68,7 +86,7 @@ export const fetchStudentDetails = async (_, id, type) => {
     }
     return {};
   } else {
-    const { data } = await axios.get(`${process.env.REACT_APP_USER_SERVICE_URL_DEV}/user/${id}`);
+    const { data } = await axios.get(`${userBaseURL}/user/${id}`);
     return data;
   }
 };

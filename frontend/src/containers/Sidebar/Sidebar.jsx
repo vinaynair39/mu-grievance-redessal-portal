@@ -15,10 +15,11 @@ import {
 } from "@ant-design/icons";
 import { useHistory } from "react-router-dom";
 
-import "./Sidebar.scss";
 import Context from "context/context";
 import { setCollapsed } from "context/actions";
 import { logout } from "context/actions";
+
+import "./Sidebar.scss";
 
 const { Sider } = Layout;
 

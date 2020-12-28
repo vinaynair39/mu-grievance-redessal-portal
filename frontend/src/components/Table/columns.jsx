@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
 import { Space, Button, Dropdown, Badge, Menu, Popconfirm, Modal } from "antd";
+
 import { replyFromPrincipalModal } from "components/CustomModals/ModalInput";
 
 const menu = ({ documents, comments, showMessage, setShowMessage, setShowDocumentsModal, setCurrentDocument }) => {
@@ -45,7 +46,7 @@ export const underProcessGrievanceColumn = ({
       dataIndex: "title",
       key: "subject",
       render: (title) => (
-        <Link style={{ color: "#5a6270" }} to={userType === "SECRETARY" ? `/grievance/${title.id}` : `/committee/grievance/${title.id}`}>
+        <Link style={{ color: "#5a6270" }} to={userType === "SECRETARY" ? `/secretary/grievance/${title.id}` : `/committee/grievance/${title.id}`}>
           {title.title}
         </Link>
       ),
@@ -147,7 +148,7 @@ export const processedGrievanceColumn = ({
       dataIndex: "title",
       key: "subject",
       render: (title) => (
-        <Link style={{ color: "#5a6270" }} to={`/grievance/${title.id}`}>
+        <Link style={{ color: "#5a6270" }} to={userType === "SECRETARY" ? `/secretary/grievance/${title.id}` : `/committee/grievance/${title.id}`}>
           {title.title}
         </Link>
       ),
@@ -206,7 +207,7 @@ export const processedGrievanceColumn = ({
       },
     },
     {
-      title: "Reply",
+      title: "Replies",
       key: "reply",
       dataIndex: "reply",
       render: ({ documents, comments, numOfReplies }) => (

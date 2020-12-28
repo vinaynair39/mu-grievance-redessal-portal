@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { PageHeader, Button, Typography, Row, Popconfirm, message } from "antd";
-import { DateTime } from "luxon";
 import { Link } from "react-router-dom";
+import { PageHeader, Button, Typography, Row, Popconfirm } from "antd";
+import { DateTime } from "luxon";
 
 import useWindowSize from "utils/useWindowSize";
-import docSvg from "assets/docs.svg";
-import profilePic from "assets/avatar.jpg";
 import ReasonModal from "components/CustomModals/ReasonModal";
 import { ShowImage } from "utils/ShowImage";
 import { StudentInfoModal } from "components/CustomModals/StudentInfoModal";
+import docSvg from "assets/docs.svg";
+import profilePic from "assets/avatar.jpg";
 
 import "./Card.scss";
 
@@ -85,7 +85,6 @@ const CustomCard = ({
     setShowRejectModal(false);
   };
 
-  console.log(author);
   return (
     <div className="Card">
       <ShowImage documents={currentDocument} visible={showDocumentsModal} close={() => setShowDocumentsModal(false)} />

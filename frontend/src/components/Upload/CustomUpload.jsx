@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Upload, Button, Modal } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import "./Upload.scss";
-
 import { useParams } from "react-router-dom";
 import ModalInput from "components/CustomModals/ModalInput";
 import { getBase64 } from "utils/getBase64";
 import { blobsToBase64s } from "utils/getBase64";
+
+import "./Upload.scss";
 
 const TempUpload = ({ actionTakenByPrincipal, onSubmit, isLoading }) => {
   const [documents, setDocuments] = useState([]);
@@ -107,7 +107,7 @@ const TempUpload = ({ actionTakenByPrincipal, onSubmit, isLoading }) => {
           <h1>Your response</h1>
         </div>
         <div className="Temp__upload-comment">
-          <Button type="primary" onClick={() => setVisible(true)} style={{ marginRight: "8px" }}>
+          <Button type="primary" onClick={() => setVisible(true)}>
             Send Message
           </Button>
         </div>
@@ -115,13 +115,13 @@ const TempUpload = ({ actionTakenByPrincipal, onSubmit, isLoading }) => {
           <Upload {...uploadProps} listType="picture-card" onPreview={handlePreview} fileList={fileList} onChange={handleChange}>
             {uploadButton}
           </Upload>
-          <Button size="large" style={{ marginRight: "8px" }} onClick={onUploadImage} disabled={isLoading || documents.length === 0} loading={isLoading}>
-            Upload Image
-          </Button>
-          <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
-          </Modal>
         </div>
+        <Button size="large" onClick={onUploadImage} disabled={isLoading || documents.length === 0} loading={isLoading}>
+          Upload Image
+        </Button>
+        <Modal visible={previewVisible} title={previewTitle} footer={null} onCancel={handleCancel}>
+          <img alt="example" style={{ width: "100%" }} src={previewImage} />
+        </Modal>
       </div>
     </>
   );

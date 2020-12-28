@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Input, Radio } from "antd";
 import Context from "context/context";
 import { setTextFilter } from "context/actions";

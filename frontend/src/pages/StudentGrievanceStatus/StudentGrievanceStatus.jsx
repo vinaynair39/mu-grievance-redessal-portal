@@ -15,7 +15,7 @@ const StudentGrievanceStatus = () => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <div className="studentView_table Table">
+          <div className="studentView_table Table animate__animated animate__fadeIn">
             <>
               <h1>Your Grievances</h1>
               <StudentTable studentGrievances={data} />

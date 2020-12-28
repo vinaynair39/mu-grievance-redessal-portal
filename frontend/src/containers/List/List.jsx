@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Pagination } from "antd";
 import ListItem from "components/ListItem/ListItem";
 import Lottie from "lottie-react-web";

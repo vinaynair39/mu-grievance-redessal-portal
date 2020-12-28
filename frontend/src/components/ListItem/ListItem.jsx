@@ -4,7 +4,7 @@ import { DateTime } from "luxon";
 import { Button, DatePicker, Radio } from "antd";
 import "./ListItem.scss";
 
-const ListItem = ({ title, createdAt, id, status, authorId, authorEmail, allotedDate, meetingType, userType, allocateDate, isLoading }) => {
+const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, userType, allocateDate, isLoading }) => {
   const [radio, setRadio] = useState(meetingType ? "VIRTUAL" : "IN_PERSON");
   const [date, setDate] = useState(null);
 
@@ -46,8 +46,8 @@ const ListItem = ({ title, createdAt, id, status, authorId, authorEmail, alloted
                 format="DD-MM-YY HH:mm"
                 allowClear={false}
                 placeholder="Allot Date"
-                onChange={(value, dateString) => {
-                  setDate(value.toISOString());
+                onChange={(value) => {
+                  setDate(value.format());
                 }}
                 disabledDate={(current) => {
                   return current && current < Date.now();
@@ -64,7 +64,6 @@ const ListItem = ({ title, createdAt, id, status, authorId, authorEmail, alloted
         </div>
       </div>
       <div className="ListItem__select">
-        {console.log(!!date, date)}
         <Button loading={isLoading} onClick={onSubmit} disabled={!!date ? false : true}>
           {status === "PENDING" || status === "UNDER_PROCESS" ? "Change Date" : "Submit"}
         </Button>

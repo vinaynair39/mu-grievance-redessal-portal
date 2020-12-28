@@ -33,7 +33,7 @@ const CommitteeDashboardPage = ({}) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <div>
+          <div className="animate__animated animate__fadeIn">
             <Filters />
             <List grievances={filteredData} card />
           </div>

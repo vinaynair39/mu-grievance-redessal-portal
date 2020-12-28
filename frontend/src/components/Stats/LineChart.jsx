@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Line } from "react-chartjs-2";
 
 const LineChart = ({ dataSet }) => {
   const currentYear = new Date().getFullYear();
   const previousYear = currentYear - 1;
-  console.log(dataSet.previousYearStats, dataSet.currentYearStats);
   const params = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
     datasets: [

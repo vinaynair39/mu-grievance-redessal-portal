@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import Reac from "react";
 import CommitteeListItem from "../../components/CommitteeListItem/CommitteeListItem";
 import "./CommitteeList.scss";
 

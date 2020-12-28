@@ -39,7 +39,7 @@ const PostGrievance = () => {
           });
         }
       },
-      retry: 0,
+      retry: 1,
       refetchOnWindowFocus: false,
       refetchOnMount: false,
     }
@@ -288,7 +288,7 @@ const PostGrievance = () => {
       {loadingGrievance ? (
         <Spinner />
       ) : (
-        <div className="PostGrievance">
+        <div className="PostGrievance animate__animated animate__fadeIn">
           <div className="steps">
             <Steps current={step - 1}>
               {steps.map((item) => (

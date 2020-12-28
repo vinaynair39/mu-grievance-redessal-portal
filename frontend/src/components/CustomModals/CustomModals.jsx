@@ -18,6 +18,7 @@ export const OtpOnlyModal = ({ visible, title, onSubmit, onCancel, loading }) =>
       confirmLoading={loading}
       onCancel={onCancel}
       closable={false}
+      maskClosable={false}
       onOk={() => {
         form
           .validateFields()
@@ -62,6 +63,7 @@ export const ResetPasswordModal = ({ visible, title, onSubmit, onCancel, loading
       onCancel={onCancel}
       confirmLoading={loading}
       closable={false}
+      maskClosable={false}
       onOk={() => {
         form
           .validateFields()
@@ -142,6 +144,7 @@ export const ForgotPasswordModal = ({ visible, title, onSubmit, onCancel, loadin
       onCancel={onCancel}
       confirmLoading={loading}
       closable={false}
+      maskClosable={false}
       onOk={() => {
         form
           .validateFields()

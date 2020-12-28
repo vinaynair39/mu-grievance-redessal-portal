@@ -3,8 +3,9 @@ import { Layout } from "antd";
 import { Student, Secretary, Committee } from "containers/NavBar/NavBar";
 import SecretarySideBar, { StudentSideBar, CommitteeSidebar } from "containers/Sidebar/Sidebar";
 import useWindowSize from "utils/useWindowSize";
-import "./Layout.scss";
 import Context from "context/context";
+
+import "./Layout.scss";
 
 const { Content } = Layout;
 

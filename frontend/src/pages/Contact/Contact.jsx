@@ -1,8 +1,9 @@
 import React from "react";
-import Navbar from "components/PublicNavbar/PublicNavbar";
-import { Typography } from "antd";
-import Map from "./map.png";
 import { HomeOutlined, PhoneTwoTone } from "@ant-design/icons";
+import { Typography } from "antd";
+
+import Navbar from "components/PublicNavbar/PublicNavbar";
+import Map from "./map.png";
 
 import "./Contact.scss";
 

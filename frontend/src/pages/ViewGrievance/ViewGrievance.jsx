@@ -18,7 +18,7 @@ const ViewGrievance = ({}) => {
     onError: () => goBackOnError(() => history.goBack()),
   });
 
-  const [rejectMutation] = useMutation(rejectGrievance, {
+  const [rejectMutation, { isLoading: rejectMutationLoading }] = useMutation(rejectGrievance, {
     onSuccess: () => {
       message.success(`Rejected Successfully!`);
       history.goBack();
@@ -26,7 +26,7 @@ const ViewGrievance = ({}) => {
     onError: errorMessage,
   });
 
-  const [selectMutation] = useMutation(selectGrievance, {
+  const [selectMutation, { isLoading: selectMutationLoading }] = useMutation(selectGrievance, {
     onSuccess: () => {
       message.success(`Selected successfully`);
       history.goBack();
@@ -55,6 +55,8 @@ const ViewGrievance = ({}) => {
             author={data.student}
             addCommentMutation={addCommentMutation}
             addCommentLoading={addCommentLoading}
+            selectMutationLoading={selectMutationLoading}
+            rejectMutationLoading={rejectMutationLoading}
           />
         )
       )}

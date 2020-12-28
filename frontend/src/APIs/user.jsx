@@ -1,8 +1,24 @@
 import Axios from "axios";
 import { setAuthorizationHeaderForGrievanceService } from "./grievance";
 
+export let userBaseURL = "";
+switch (process.env.NODE_ENV) {
+  case "development":
+    userBaseURL = process.env.REACT_APP_USER_SERVICE_URL_DEV;
+    break;
+  case "production":
+    userBaseURL = process.env.REACT_APP_USER_SERVICE_URL_PROD;
+    break;
+  case "test":
+    userBaseURL = process.env.REACT_APP_USER_SERVICE_URL_TEST;
+    break;
+  default:
+    userBaseURL = process.env.REACT_APP_USER_SERVICE_URL_DEV;
+    break;
+}
+
 const axios = Axios.create({
-  baseURL: `${process.env.REACT_APP_USER_SERVICE_URL_}${process.env.NODE_ENV.toUpperCase()}`,
+  baseURL: userBaseURL,
 });
 
 export const setAuthorizationHeader = (token, userType) => {

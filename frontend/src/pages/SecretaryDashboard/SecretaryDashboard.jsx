@@ -52,7 +52,7 @@ const SecretaryDashboard = ({}) => {
         {isLoading ? (
           <Spinner />
         ) : (
-          <div>
+          <div className="animate__animated animate__fadeIn">
             <Filters />
             <List
               grievances={filteredData}

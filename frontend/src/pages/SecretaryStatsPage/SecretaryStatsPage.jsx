@@ -18,7 +18,7 @@ const SecretaryStats = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="secretaryStats_Main">
+        <div className="secretaryStats_Main animate__animated animate__fadeIn">
           <h1>Statistics</h1>
           <div className="secretaryStats_charts">
             <div className="secretaryStats_line">

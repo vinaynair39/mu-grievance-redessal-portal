@@ -1,6 +1,12 @@
 .UploadPage {
-    overflow-x: hidden;
+  min-height: 100vh;
+  height: 100%;
+  overflow-x: hidden;
 }
 .UploadPage__card {
-    padding: 5vh 5vw;
+  padding: 4vh 4vw;
+  padding-bottom: 0;
+}
+.Upload__spinner {
+  height: 92vh;
 }

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 const StudentDashboardPage = () => {
   return (
     <Layout>
-      <div className="StudenntDashboardPage">
+      <div className="StudenntDashboardPage animate__animated animate__fadeIn">
         <div className="StudenntDashboardPage__buttons">
           <div className="StudenntDashboardPage__button1">
             <Link to="/student/post">

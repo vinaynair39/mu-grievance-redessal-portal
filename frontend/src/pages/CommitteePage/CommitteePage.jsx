@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from "antd";
+import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
+
 import { Spinner } from "components/Loaders/Loaders";
 import CommitteeList from "containers/CommitteeList/CommitteeList";
-import "./CommitteePage.scss";
-import { useQuery } from "react-query";
+
 import { getAllCommittee } from "APIs/user";
 import Layout from "containers/Layout/Layout";
+import "./CommitteePage.scss";
 
 const CommitteePage = () => {
   const { isLoading, data } = useQuery("getAllCommitees", getAllCommittee);
@@ -15,7 +17,7 @@ const CommitteePage = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="CommitteePage__add animated fadeIn">
+        <div className="CommitteePage__add animate__animated animate__fadeIn">
           <h1>Committee</h1>
           <CommitteeList data={data.committee} />
           {!isLoading && (
