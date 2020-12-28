@@ -29,6 +29,7 @@ provider:
     ZOOM_API_KEY: ${file(./config/envVars.js):getEnvVars.ZOOM_API_KEY}
     ZOOM_API_SECRET: ${file(./config/envVars.js):getEnvVars.ZOOM_API_SECRET}
     ZOOM_API_EMAIL: ${file(./config/envVars.js):getEnvVars.ZOOM_API_EMAIL}
+    FRONT_END_URL: ${file(./config/envVars.js):getEnvVars.FRONT_END_URL}
 
   iamRoleStatements:
     - ${file(iam/GrievanceTableIAM.yml):GrievanceTableIAM}
@@ -176,6 +177,11 @@ functions:
           method: GET
           path: /grievance/stats
           cors: true
+
+  notifyNewGrievances:
+    handler: src/lambdas/notifyNewGrievances.handler
+    events:
+      - schedule: cron(0 10 * * ? *)
 
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${self:provider.stage}-auth

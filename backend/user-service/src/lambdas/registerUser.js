@@ -60,6 +60,7 @@ async function registerUser(event, context) {
     otp = generateOtp();
     user.isVerified = false;
     user.otp = otp;
+    user.studentInfo = {};
   }
 
   // saving the user into the db

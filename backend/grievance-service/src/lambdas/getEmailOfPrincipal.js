@@ -1,9 +1,9 @@
 import commonMiddleware from "../lib/commonMiddleware";
-import AWS from "aws-sdk";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 import createHttpError from "http-errors";
 
-const dynamodb = new AWS.DynamoDB.DocumentClient({
-  region: GRIEVANCE_SERVICE_AWS_REGION,
+const dynamodb = new DynamoDB.DocumentClient({
+  region: process.env.GRIEVANCE_SERVICE_AWS_REGION,
 });
 
 async function getEmailOfPrincipal(event, context) {

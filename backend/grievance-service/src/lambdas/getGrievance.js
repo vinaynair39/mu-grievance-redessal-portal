@@ -1,9 +1,9 @@
-import AWS from "aws-sdk";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 import commonMiddleware from "../lib/commonMiddleware";
 import createError from "http-errors";
 import { getUserById } from "../lib/getUserById";
 
-const dynamodb = new AWS.DynamoDB.DocumentClient({
+const dynamodb = new DynamoDB.DocumentClient({
   region: process.env.GRIEVANCE_SERVICE_AWS_REGION,
 });
 

@@ -1,7 +1,7 @@
 import createError from "http-errors";
-import AWS from "aws-sdk";
+import SQS from "aws-sdk/clients/sqs";
 
-const sqs = new AWS.SQS({
+const sqs = new SQS({
   region: process.env.GRIEVANCE_SERVICE_AWS_REGION,
 });
 

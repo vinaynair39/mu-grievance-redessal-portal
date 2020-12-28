@@ -7,7 +7,9 @@ import { getGrievanceById } from "./getGrievance";
 
 async function invitePrincipalForMeeting(event, context) {
   const { id, principalEmail, collegeName } = event.body;
-  const { meetingType, meetingJoinLink } = await getGrievanceById(id);
+  const { meetingType, meetingJoinLink, title } = await getGrievanceById(id);
+
+  console.log(id, principalEmail, collegeName, meetingType, meetingJoinLink, title);
 
   const params = {
     TableName: process.env.CONTACTS_TABLE_NAME,
@@ -30,6 +32,14 @@ async function invitePrincipalForMeeting(event, context) {
   await sendMail({
     subject: "Invitation to attend the meeting held to solve the grievance of your student",
     body: emailBody,
+    email: principalEmail,
+  });
+
+  await sendMail({
+    subject: "A Grievance has been posted by a student from your college -  Mumbai University Grievance Redressal Cell",
+    body: `A grievance stating - "${title}" has been posted in our portal. You can view detailed information about this grievance over here: ${
+      process.env.FRONT_END_URL + "/upload/" + id
+    }`,
     email: principalEmail,
   });
 

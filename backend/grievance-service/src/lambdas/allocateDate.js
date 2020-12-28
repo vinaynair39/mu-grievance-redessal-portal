@@ -1,19 +1,32 @@
 import request from "request";
-import moment from "moment";
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import utc from "dayjs/plugin/utc"; // dependent on utc plugin
+import timezone from "dayjs/plugin/timezone";
 import commonMiddleware from "../lib/commonMiddleware";
 import status from "../lib/status";
 import { updateById } from "../lib/updateById";
 import { sendMail } from "../lib/sendMail";
+import { getGrievanceById } from "./getGrievance";
+
+dayjs.extend(localizedFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 async function allocateDate(event, context) {
   const { id } = event.pathParameters;
-  let { meetingType, date } = event.body;
   const { token } = event.requestContext.authorizer;
+  let { meetingType, date } = event.body;
+  const { title } = await getGrievanceById(id);
+
   let joinUrl = null;
   let startUrl = null;
-  let emailBody = "Fort/Vidyanagari Campus of University of Mumbai/Vidyapeeth Vidyarthi Bhavan, ‘B’ Road, Churchgate, Mumbai";
 
-  const formatedDate = moment(date).format("YYYY-MM-DDTHH:mm:ss");
+  let emailBody = `A Meeting has been scheduled on ${dayjs(date)
+    .tz("Asia/Kolkata")
+    .format(
+      "LLL"
+    )} for your grievance to be solved. You will have to come to Fort/Vidyanagari Campus of University of Mumbai/Vidyapeeth Vidyarthi Bhavan, ‘B’ Road, Churchgate, Mumbai`;
 
   if (meetingType.toUpperCase() === "VIRTUAL") {
     const options = {
@@ -24,11 +37,11 @@ async function allocateDate(event, context) {
         authorization: `Bearer ${token}`,
       },
       body: {
-        topic: "Regarding grievance",
+        topic: `Regarding grievance ${title}`,
         type: 2,
         password: "12345",
         timezone: "Asia/Kolkata",
-        start_time: formatedDate,
+        start_time: date,
       },
       json: true,
     };
@@ -40,10 +53,13 @@ async function allocateDate(event, context) {
       });
     });
 
-    const { join_url, start_url, password } = await result;
+    const { join_url, start_url } = await result;
+
     joinUrl = join_url;
     startUrl = start_url;
-    emailBody = `Meeting Link ${join_url} and password ${password}`;
+    emailBody = `A Virtual Meeting has been scheduled on ${dayjs(date)
+      .tz("Asia/Kolkata")
+      .format("LLL")} for your grievance to be solved.The Meeting Link is ${join_url}.`;
   }
 
   const grievanceParams = {
@@ -68,7 +84,7 @@ async function allocateDate(event, context) {
   const { authorEmail } = await updateById(grievanceParams);
 
   await sendMail({
-    subject: "Regarding your grievance",
+    subject: `Regarding your grievance ${title}`,
     email: authorEmail,
     body: emailBody,
   });

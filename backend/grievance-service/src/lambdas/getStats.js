@@ -1,11 +1,21 @@
 import commonMiddleware from "../lib/commonMiddleware";
-import AWS from "aws-sdk";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 import createHttpError from "http-errors";
-import moment from "moment";
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+import dayjs from "dayjs";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+import utc from "dayjs/plugin/utc"; // dependent on utc plugin
+import timezone from "dayjs/plugin/timezone";
+
+const dynamodb = new DynamoDB.DocumentClient({
+  region: process.env.GRIEVANCE_SERVICE_AWS_REGION,
+});
+dayjs.extend(localizedFormat);
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 async function getStats(event, context) {
   let grievances;
+
   const params = {
     TableName: process.env.GRIEVANCE_TABLE_NAME,
     ProjectionExpression: "#status, #date",
@@ -66,8 +76,7 @@ async function getStats(event, context) {
   };
 
   grievances.forEach((grievance) => {
-    const [month, year] = moment(grievances.createdAt).format("MMM YYYY").split(" ");
-    console.log("data", month, year);
+    const [month, year] = dayjs(grievances.createdAt).format("ll").split(" ");
     stats[grievance.status] += 1;
     if (year == currentYear) currentYearStats[month] += 1;
     else if (year == previousYear) previousYearStats[month] += 1;

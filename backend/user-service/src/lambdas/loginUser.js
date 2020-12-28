@@ -37,7 +37,7 @@ async function loginUser(event, context) {
   if (user.userType !== "STUDENT") {
     // we are checking if the committee member has uploaded his profile image previously
     // if yes then we use the url as the payload else we attach a dummy profile image url
-    payload.imageUrl = user.committeeInfo.imageUrl;
+    payload.imageUrl = !!user.committeeInfo ? user.committeeInfo.imageUrl : "";
   }
 
   let token = await generateJWT(payload);

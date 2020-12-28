@@ -7,12 +7,13 @@ const dynamodb = new DynamoDB.DocumentClient({
 
 export async function updateById(params) {
   let data;
+  console.log("params", params);
   try {
     const { Attributes } = await dynamodb.update(params).promise();
     data = Attributes;
   } catch (error) {
     console.error(error);
-    throw new createError.InternalServerError(error);
+    throw new createError.InternalServerError("Something went wrong while updating.");
   }
   return data;
 }

@@ -13,13 +13,12 @@ const principalActionsSchema = {
       type: "object",
       properties: {
         comments: {
-          type: "string",
+          type: "array",
         },
         documents: {
-          type: "string",
+          type: "array",
         },
       },
-      required: ["comments", "documents"],
     },
   },
   required: ["pathParameters", "body"],

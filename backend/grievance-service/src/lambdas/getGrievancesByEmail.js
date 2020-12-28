@@ -1,8 +1,8 @@
-import AWS from "aws-sdk";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 import commonMiddleware from "../lib/commonMiddleware";
 import createError from "http-errors";
 
-const dynamodb = new AWS.DynamoDB.DocumentClient();
+const dynamodb = new DynamoDB.DocumentClient();
 
 async function getGrievancesByEmail(event, context) {
   const { email } = event.requestContext.authorizer;
