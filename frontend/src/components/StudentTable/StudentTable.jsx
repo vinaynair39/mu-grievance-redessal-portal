@@ -157,7 +157,7 @@ const StudentTable = ({ studentGrievances }) => {
         columns={studcolumn}
         scroll={{ x: width < 450 ? true : null }}
         size={width < 800 ? "small" : "medium"}
-        pagination={{ position: ["bottomLeft"], defaultPageSize: 8 }}
+        pagination={{ position: ["bottomLeft"], defaultPageSize: 4 }}
       />
     </div>
   );
