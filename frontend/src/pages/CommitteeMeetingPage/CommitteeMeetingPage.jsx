@@ -6,7 +6,7 @@ import CustomTable from "components/Table/Table";
 import { getGrievances } from "APIs/grievance";
 import { errorMessage } from "utils/modalMessage";
 
-const CommitteeMeetingPage = ({}) => {
+const CommitteeMeetingPage = () => {
   const { isLoading, data } = useQuery(["getGrievances", "UNDER_PROCESS"], getGrievances, {
     onError: errorMessage,
     staleTime: 10000,

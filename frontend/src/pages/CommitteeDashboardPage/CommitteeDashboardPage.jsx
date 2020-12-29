@@ -11,7 +11,7 @@ import Filters from "components/Filters/Filters";
 
 // import "CommitteeDashboardPage.scss";
 
-const CommitteeDashboardPage = ({}) => {
+const CommitteeDashboardPage = () => {
   const [filteredData, setfilteredData] = useState([]);
   const {
     state: { filters },

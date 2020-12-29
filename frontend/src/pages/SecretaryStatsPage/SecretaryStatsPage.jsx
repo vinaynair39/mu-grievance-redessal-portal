@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Spinner } from "components/Loaders/Loaders";
 import { useQuery } from "react-query";
 import { errorMessage } from "utils/modalMessage";
-import "./SecretaryStatsPage.scss";
 import { getGrievanceStats } from "APIs/grievance";
 import PieChart from "components/Stats/PieChart";
 import LineChart from "components/Stats/LineChart";
 import Layout from "containers/Layout/Layout";
+
+import "./SecretaryStatsPage.scss";
 
 const SecretaryStats = () => {
   const { isLoading, data } = useQuery("stats", getGrievanceStats, {

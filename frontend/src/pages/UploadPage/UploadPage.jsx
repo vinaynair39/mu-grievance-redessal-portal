@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "components/PublicNavbar/PublicNavbar";
 import { useMutation, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
@@ -8,11 +8,11 @@ import CustomUpload from "components/Upload/CustomUpload";
 import { getGrievance } from "APIs/grievance";
 import { sendPrincipalActions } from "APIs/grievance";
 import { validObject } from "utils/validObject";
-
-import "./UploadPage.scss";
 import { errorMessage, successMessage } from "utils/modalMessage";
 
-const UploadPage = ({}) => {
+import "./UploadPage.scss";
+
+const UploadPage = () => {
   const { id } = useParams();
   const { isLoading, data } = useQuery(["UploadPageGetGrievance", id], getGrievance, {
     retry: 1,

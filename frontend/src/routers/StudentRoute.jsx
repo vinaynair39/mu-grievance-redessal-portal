@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
 import Context from "context/context";
 
-export default ({ component: Component, ...rest }) => {
+const StudentRoute = ({ component: Component, ...rest }) => {
   const {
     state: { isAuthenticated, userType },
   } = useContext(Context);
@@ -21,3 +21,5 @@ export default ({ component: Component, ...rest }) => {
     />
   );
 };
+
+export default StudentRoute;

@@ -14,7 +14,7 @@ import { ReactComponent as Bg } from "assets/bg.svg";
 
 import "./HomePage.scss";
 
-const HomePage = ({}) => {
+const HomePage = () => {
   const [type, setType] = useState(() => "LOGIN");
   const [showVerifyModal, setShowVerifyModal] = useState(false);
   const [otpModalTitle, setOtpModalTitle] = useState("An OTP has been sent to your Email ID. Enter that OTP here to successfully register.");

@@ -64,16 +64,19 @@ const InvitePrincipalModal = ({
   id,
   isLoading,
 }) => {
-  const { isLoading: fetchEmailLoading, data } = useQuery(["fetchEmailId", collegeName], fetchEmailIdOfPrincipal, {
+  const { data } = useQuery(["fetchEmailId", collegeName], fetchEmailIdOfPrincipal, {
     onError: errorMessage,
     retry: 0,
   });
   const [form] = Form.useForm();
 
   useEffect(() => {
-    form.setFieldsValue({
-      recipient: !!data ? data.email : "",
-    });
+    const setRecipient = () => {
+      form.setFieldsValue({
+        recipient: !!data ? data.email : "",
+      });
+    };
+    setRecipient();
   }, [data]);
 
   return (
@@ -125,15 +128,18 @@ const InvitePrincipalModal = ({
 
 const ModalATR = ({ visible = false, onCreate, onCancel, title, collegeName, id, isLoading }) => {
   const [form] = Form.useForm();
-  const { isLoading: fetchEmailLoading, data } = useQuery(["fetchEmailIdForATR", collegeName], fetchEmailIdOfPrincipal, {
+  const { data } = useQuery(["fetchEmailIdForATR", collegeName], fetchEmailIdOfPrincipal, {
     onError: errorMessage,
     retry: 0,
   });
 
   useEffect(() => {
-    form.setFieldsValue({
-      recipient: !!data ? data.email : "",
-    });
+    const setRecipient = () => {
+      form.setFieldsValue({
+        recipient: !!data ? data.email : "",
+      });
+    };
+    setRecipient();
   }, [data]);
 
   return (

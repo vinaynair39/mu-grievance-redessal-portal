@@ -1,7 +1,6 @@
 import React from "react";
 import { useQuery, useMutation } from "react-query";
 import CommitteeForm from "components/CommitteeForm/CommitteeForm";
-import "./CommitteeViewPage.scss";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 import { errorMessage } from "utils/modalMessage";
 import { Modal } from "antd";
@@ -10,6 +9,7 @@ import { getCommittee } from "APIs/user";
 import { editCommittee } from "APIs/user";
 import Layout from "containers/Layout/Layout";
 import { Spinner } from "components/Loaders/Loaders";
+import "./CommitteeViewPage.scss";
 
 const CommitteeViewPage = () => {
   const { id } = useParams();

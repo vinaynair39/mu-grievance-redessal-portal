@@ -90,7 +90,7 @@ const PostGrievance = () => {
 
   useEffect(() => {
     if (validObject(student)) {
-      setFormData({ ...formData, ...grievance, ...student.studentInfo });
+      setFormData(() => ({ ...formData, ...grievance, ...student.studentInfo }));
       setSignatureState({
         ...signatureState,
         signatureFileList: validObject(student.studentInfo)

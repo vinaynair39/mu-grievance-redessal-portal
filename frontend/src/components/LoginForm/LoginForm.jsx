@@ -103,7 +103,9 @@ const LoginForm = ({ loading = false, onSubmit, setType }) => {
               cancelText="No"
               on
             >
-              <a className="LoginForm__forgot-button">Forgot password</a>
+              <Button type="link" className="LoginForm__forgot-button">
+                Forgot password
+              </Button>
             </Popconfirm>
           </div>
 

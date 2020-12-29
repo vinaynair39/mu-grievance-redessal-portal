@@ -7,7 +7,7 @@ import useWindowSize from "utils/useWindowSize";
 
 import "./PublicNavbar.scss";
 
-const Navbar = ({}) => {
+const Navbar = () => {
   const [isOpen, setOpen] = useState(false);
   const { pathname } = useLocation();
   const { width } = useWindowSize();

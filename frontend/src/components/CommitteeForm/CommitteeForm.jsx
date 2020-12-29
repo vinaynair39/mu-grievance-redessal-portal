@@ -18,17 +18,19 @@ const CommitteeForm = ({ formValues = {}, onSubmit, edit, mutationLoading }) => 
   const { Option } = Select;
 
   useEffect(() => {
-    if (edit) {
-      form.setFieldsValue({
-        ...formValues,
-        ...formValues.committeeInfo,
-        password: "",
-      });
-      if (!!formValues.committeeInfo) {
-        console.log("inside");
-        setCurrentImageUrl(formValues.committeeInfo.imageUrl);
+    const setFormValues = () => {
+      if (edit) {
+        form.setFieldsValue({
+          ...formValues,
+          ...formValues.committeeInfo,
+          password: "",
+        });
+        if (!!formValues.committeeInfo) {
+          setCurrentImageUrl(formValues.committeeInfo.imageUrl);
+        }
       }
-    }
+    };
+    setFormValues();
   }, [formValues]);
 
   const onFinish = async (values) => {
@@ -144,7 +146,6 @@ const CommitteeForm = ({ formValues = {}, onSubmit, edit, mutationLoading }) => 
               style={{ width: width > 1024 ? "25vw" : "100%" }}
               size="large"
               placeholder="Enter your college name"
-              filterOption={false}
               optionFilterProp="children"
               filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
               filterSort={(optionA, optionB) => optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())}

@@ -9,7 +9,7 @@ import { getGrievance, rejectGrievance, selectGrievance } from "APIs/grievance";
 import { addComment } from "APIs/grievance";
 import Layout from "containers/Layout/Layout";
 
-const ViewGrievance = ({}) => {
+const ViewGrievance = () => {
   const { id } = useParams();
   const history = useHistory();
 

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useQuery } from "react-query";
-
 import addFilter from "utils/grievanceSelector";
 import { errorMessage } from "utils/modalMessage";
 import { getGrievances } from "APIs/grievance";
@@ -10,7 +9,7 @@ import List from "containers/List/List";
 import Layout from "containers/Layout/Layout";
 import Filters from "components/Filters/Filters";
 
-const CompletedPage = ({}) => {
+const CompletedPage = () => {
   const [filteredData, setfilteredData] = useState([]);
   const [type, setType] = useState("SOLVED");
   const {

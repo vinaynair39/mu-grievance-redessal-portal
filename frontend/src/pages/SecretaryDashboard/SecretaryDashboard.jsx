@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import { useMutation, useQuery } from "react-query";
 import addFilter from "utils/grievanceSelector";
 import { errorMessage } from "utils/modalMessage";
@@ -12,7 +11,7 @@ import Filters from "components/Filters/Filters";
 import { message } from "antd";
 import Layout from "containers/Layout/Layout";
 
-const SecretaryDashboard = ({}) => {
+const SecretaryDashboard = () => {
   const [filteredData, setfilteredData] = useState([]);
   const {
     state: { filters },

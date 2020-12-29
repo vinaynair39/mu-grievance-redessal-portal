@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { DateTime } from "luxon";
-import { Space, Button, Dropdown, Badge, Menu, Popconfirm, Modal } from "antd";
+import { Space, Button, Dropdown, Badge, Menu, Popconfirm } from "antd";
 
 import { replyFromPrincipalModal } from "components/CustomModals/ModalInput";
 
@@ -98,7 +98,7 @@ export const underProcessGrievanceColumn = ({
       render: (meetingLink) => (
         <Space size="middle">
           <Button type="dashed">
-            <a type="primary" href={meetingLink} target="_blank">
+            <a type="primary" href={meetingLink} target="_blank" rel="noreferrer">
               {userType === "secretary" ? "Start" : "Join"}
             </a>
           </Button>

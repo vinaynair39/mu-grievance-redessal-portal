@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "antd";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-
 import { Spinner } from "components/Loaders/Loaders";
 import CommitteeList from "containers/CommitteeList/CommitteeList";
 

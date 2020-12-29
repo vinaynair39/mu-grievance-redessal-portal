@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Form, Input, Select, Button, Upload, Spin, Modal } from "antd";
+import { Form, Input, Select, Button, Upload, Modal } from "antd";
 import { collegeNames } from "utils/collegeNames";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -75,7 +75,7 @@ const Step1 = ({ setStep, signature, signatureProps, signatureState, setSignatur
               ]}
               className="form-label"
             >
-              <Input size="large" placeholder="Enter your Full Name " className="form-input" size="large" />
+              <Input size="large" placeholder="Enter your Full Name " className="form-input" />
             </Form.Item>
             <Form.Item
               label="Phone Number"
@@ -96,7 +96,7 @@ const Step1 = ({ setStep, signature, signatureProps, signatureState, setSignatur
               ]}
               className="form-label"
             >
-              <Input size="large" placeholder="Enter your phone number" size="large" />
+              <Input size="large" placeholder="Enter your phone number" />
             </Form.Item>
             <Form.Item
               label="Gender"
@@ -130,7 +130,6 @@ const Step1 = ({ setStep, signature, signatureProps, signatureState, setSignatur
                 showSearch
                 size="large"
                 placeholder="Enter your college name"
-                filterOption={false}
                 optionFilterProp="children"
                 filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
                 filterSort={(optionA, optionB) => optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())}
@@ -230,7 +229,7 @@ const Step1 = ({ setStep, signature, signatureProps, signatureState, setSignatur
                   disabled={
                     !form.isFieldsTouched(false) ||
                     form.getFieldsError().filter(({ errors }) => errors.length).length ||
-                    (signature.length == 0 && signatureState.signatureFileList.length == 0)
+                    (signature.length === 0 && signatureState.signatureFileList.length === 0)
                   }
                 >
                   Next

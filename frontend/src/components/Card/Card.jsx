@@ -38,8 +38,9 @@ const CustomCard = ({
   const { width } = useWindowSize();
 
   const IconLink = ({ src, text }) => (
-    <a
-      className="example-link"
+    <Button
+      type="link"
+      className="Card__link"
       onClick={() => {
         text === "View Supporting Documents" ? setCurrentDocument(supportingDocsUrls) : setCurrentDocument(cgrcDocsUrls);
         setShowDocumentsModal(true);
@@ -47,7 +48,7 @@ const CustomCard = ({
     >
       <img className="example-link-icon" src={src} alt={text} />
       {text}
-    </a>
+    </Button>
   );
 
   const content = (

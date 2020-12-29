@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Layout, Menu, Icon } from "antd";
+import { Layout, Menu } from "antd";
 import { useLocation, NavLink } from "react-router-dom";
 import {
   DatabaseOutlined,
@@ -29,7 +29,6 @@ const SecretarySideBar = () => {
     dispatch,
   } = useContext(Context);
   const { pathname } = useLocation();
-  let history = useHistory();
 
   const onCollapse = (state) => {
     dispatch(setCollapsed(state));

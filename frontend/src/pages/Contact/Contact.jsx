@@ -1,14 +1,11 @@
 import React from "react";
 import { HomeOutlined, PhoneTwoTone } from "@ant-design/icons";
-import { Typography } from "antd";
-
 import Navbar from "components/PublicNavbar/PublicNavbar";
 import Map from "./map.png";
 
 import "./Contact.scss";
 
 const Contact = () => {
-  const { Text } = Typography;
   return (
     <>
       <div className="Contact">

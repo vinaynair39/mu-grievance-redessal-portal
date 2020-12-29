@@ -93,7 +93,7 @@ const StudentTable = ({ studentGrievances }) => {
           if (meetingType === "VIRTUAL")
             return (
               <Button style={{ backgroundColor: "#2F8ECF", color: "white" }}>
-                <a type="primary" href={meetingJoin} target="_blank">
+                <a type="primary" href={meetingJoin} target="_blank" rel="noreferrer">
                   Join Meeting
                 </a>
               </Button>

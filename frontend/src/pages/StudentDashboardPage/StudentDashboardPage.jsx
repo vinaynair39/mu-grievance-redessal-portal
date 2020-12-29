@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Lottie from "lottie-react-web";
 import animation from "assets/add.json";
 import view from "assets/view.json";

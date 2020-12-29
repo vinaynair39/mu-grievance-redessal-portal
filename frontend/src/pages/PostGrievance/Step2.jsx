@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Modal, Input, Select, Button, Upload, notification } from "antd";
-import { UploadOutlined, PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import "./Step1.scss";
 import "./PostGrievance.scss";
 import { getBase64 } from "utils/getBase64";
