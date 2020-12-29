@@ -19,6 +19,9 @@ const CommitteeViewPage = () => {
   const edit = pathname.includes("edit");
 
   const [registerMutation, { isLoading: registerLoading }] = useMutation(registerUser, {
+    retry: 1,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
     onSuccess: () => {
       Modal.success({
         title: "Success!",
