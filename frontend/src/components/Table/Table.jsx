@@ -51,59 +51,56 @@ const CustomTable = ({
   const { width } = useWindowSize();
 
   useEffect(() => {
-    const initializeTable = () => {
-      let dataA = [];
-      let dataB = [];
-      data.forEach((ele, index) => {
-        if (Array.isArray(ele.resolutionLetter) && ele.resolutionLetter.length > 0) {
-          dataB.push({
-            key: ele.id,
-            allotedAt: ele.allotedAt,
-            complaintAgainst: ele.complaintAgainst,
-            scheduleNewMeeting: { authorEmail: ele.authorEmail, id: ele.id },
-
-            srNo: {
-              index: index + 1,
-              id: ele.id,
-            },
-            title: {
-              title: ele.title,
-              id: ele.id,
-            },
-            id: ele.id,
-            reply: {
-              documents: ele.actionTakenByPrincipal.documents,
-              comments: ele.actionTakenByPrincipal.comments,
-              numOfReplies: ele.actionTakenByPrincipal.documents.length + ele.actionTakenByPrincipal.comments.length,
-            },
-            resolutionWritten: {
-              resolutionWritten: ele.resolutionLetter,
-              collegeName: ele.againstCollegeName,
-            },
-            resolution: { collegeName: ele.againstCollegeName, invited: ele.invitedPrincial, id: ele.id },
-          });
-        }
-        dataA.push({
+    let dataA = [];
+    let dataB = [];
+    data.forEach((ele, index) => {
+      if (Array.isArray(ele.resolutionLetter) && ele.resolutionLetter.length > 0) {
+        dataB.push({
           key: ele.id,
           allotedAt: ele.allotedAt,
           complaintAgainst: ele.complaintAgainst,
+          scheduleNewMeeting: { authorEmail: ele.authorEmail, id: ele.id },
+
           srNo: {
             index: index + 1,
             id: ele.id,
           },
-          meeting: userType === "SECRETARY" ? ele.meetingStartLink : ele.meetingJoinLink,
-          meetingType: ele.meetingType === "IN_PERSON" ? "Personal" : "Virtual",
           title: {
             title: ele.title,
             id: ele.id,
           },
+          id: ele.id,
+          reply: {
+            documents: ele.actionTakenByPrincipal.documents,
+            comments: ele.actionTakenByPrincipal.comments,
+            numOfReplies: ele.actionTakenByPrincipal.documents.length + ele.actionTakenByPrincipal.comments.length,
+          },
+          resolutionWritten: {
+            resolutionWritten: ele.resolutionLetter,
+            collegeName: ele.againstCollegeName,
+          },
           resolution: { collegeName: ele.againstCollegeName, invited: ele.invitedPrincial, id: ele.id },
         });
+      }
+      dataA.push({
+        key: ele.id,
+        allotedAt: ele.allotedAt,
+        complaintAgainst: ele.complaintAgainst,
+        srNo: {
+          index: index + 1,
+          id: ele.id,
+        },
+        meeting: userType === "SECRETARY" ? ele.meetingStartLink : ele.meetingJoinLink,
+        meetingType: ele.meetingType === "IN_PERSON" ? "Personal" : "Virtual",
+        title: {
+          title: ele.title,
+          id: ele.id,
+        },
+        resolution: { collegeName: ele.againstCollegeName, invited: ele.invitedPrincial, id: ele.id },
       });
-      setDataSourceA(dataA);
-      setDataSourceB(dataB);
-    };
-    initializeTable();
+    });
+    setDataSourceA(dataA);
+    setDataSourceB(dataB);
   }, [data]);
 
   const onCreateAtr = (values) => {

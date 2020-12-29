@@ -39,6 +39,7 @@ const AppRouter = () => {
         <SecretaryRoute path="/secretary/grievance/:id" component={ViewGrievance} />
         <SecretaryRoute path="/secretary/statistics" component={SecretaryStats} />
         <SecretaryRoute path="/secretary/committee" component={CommitteePage} exact />
+        <SecretaryRoute path="/secretary/committee/register" component={CommitteeViewPage} exact />
         <SecretaryRoute path="/secretary/committee/:id" component={CommitteeViewPage} exact={true} />
         <SecretaryRoute path="/secretary/committee/edit/:id" component={CommitteeViewPage} exact={true} />
         <SecretaryRoute path="/secretary/profile" component={ProfilePage} exact={true} />

@@ -18,19 +18,16 @@ const CommitteeForm = ({ formValues = {}, onSubmit, edit, mutationLoading }) => 
   const { Option } = Select;
 
   useEffect(() => {
-    const setFormValues = () => {
-      if (edit) {
-        form.setFieldsValue({
-          ...formValues,
-          ...formValues.committeeInfo,
-          password: "",
-        });
-        if (!!formValues.committeeInfo) {
-          setCurrentImageUrl(formValues.committeeInfo.imageUrl);
-        }
+    if (edit) {
+      form.setFieldsValue({
+        ...formValues,
+        ...formValues.committeeInfo,
+        password: "",
+      });
+      if (!!formValues.committeeInfo) {
+        setCurrentImageUrl(formValues.committeeInfo.imageUrl);
       }
-    };
-    setFormValues();
+    }
   }, [formValues]);
 
   const onFinish = async (values) => {

@@ -33,7 +33,6 @@ async function notifyNewGrievances(event, context) {
     const yesterdaysGrievances = Items.filter(({ createdAt }) => {
       return yesterdaysDate === dayjs(createdAt).tz("Asia/Kolkata").format("LLL");
     });
-
     const previousGrievanceLength = Items.length - yesterdaysGrievances.length;
     if (yesterdaysGrievances.length > 0 || previousGrievanceLength > 0)
       await sendMail({
