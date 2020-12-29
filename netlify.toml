@@ -2,7 +2,7 @@
 [build]
   base = "frontend"
   command = "CI=false npm run build"
-  publish = "frontend/build"
+  publish = "build"
 
   # Uncomment to use this redirect for Single Page Applications like create-react-app.
   # Not needed for static site generators.
