@@ -15,13 +15,14 @@ const CommitteeViewPage = () => {
   const { id } = useParams();
   const history = useHistory();
   const { pathname } = useLocation();
-  const { data, isLoading } = useQuery(["fetchCommitteeMember", id], getCommittee);
+  const { data, isLoading } = useQuery(["fetchCommitteeMember", id], getCommittee, {
+    retry: 0,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
   const edit = pathname.includes("edit");
 
   const [registerMutation, { isLoading: registerLoading }] = useMutation(registerUser, {
-    retry: 1,
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
     onSuccess: () => {
       Modal.success({
         title: "Success!",
