@@ -25,7 +25,7 @@
     }
     @include media("<tablet") {
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-evenly;
       height: 90vh;
     }
     .StudenntDashboardPage__button1 {
@@ -37,7 +37,7 @@
       transition: all 0.2s;
       @include media("<tablet") {
         width: 100vw;
-        height: 30vh;
+        height: 25vh;
       }
       &:hover {
         transform: scale(1.1);
@@ -52,7 +52,7 @@
       transition: all 0.2s;
       @include media("<tablet") {
         width: 100vw;
-        height: 45vh;
+        height: 35vh;
         top: -2vh;
       }
       &:hover {
@@ -64,7 +64,7 @@
         z-index: 100;
         top: -8vh;
         @include media("<tablet") {
-          top: -5vh;
+          top: -4vh;
         }
       }
     }

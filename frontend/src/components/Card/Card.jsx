@@ -28,13 +28,12 @@ const CustomCard = ({
   author = {},
   rejectMutation,
   selectMutation,
-  selectGrievanceLoading,
-  rejectGrievanceLoading,
 }) => {
   const [currentDocument, setCurrentDocument] = useState([]);
   const [showDocumentsModal, setShowDocumentsModal] = useState(false);
   const [showRejectModal, setShowRejectModal] = useState(false);
   const [showStudentInfoModal, setShowStudentInfoModal] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { width } = useWindowSize();
 
   const IconLink = ({ src, text }) => (
@@ -113,16 +112,18 @@ const CustomCard = ({
                   onConfirm={() => setShowRejectModal(true)}
                   cancelText="No"
                 >
-                  <Button type="primary" loading={rejectGrievanceLoading} style={{ background: "#E5435A", borderColor: "#E5435A" }}>
+                  <Button type="primary" style={{ background: "#E5435A", borderColor: "#E5435A" }}>
                     Reject
                   </Button>
                 </Popconfirm>,
                 <Button
                   key="1"
                   type="primary"
-                  loading={selectGrievanceLoading}
-                  onClick={() => {
-                    selectMutation(id);
+                  loading={loading}
+                  onClick={async () => {
+                    setLoading(true);
+                    await selectMutation(id);
+                    setLoading(false);
                   }}
                 >
                   Select

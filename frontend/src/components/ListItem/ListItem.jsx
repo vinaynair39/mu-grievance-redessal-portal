@@ -4,17 +4,19 @@ import { DateTime } from "luxon";
 import { Button, DatePicker, Radio } from "antd";
 import "./ListItem.scss";
 
-const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, userType, allocateDate, isLoading }) => {
+const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, userType, allocateDate }) => {
   const [radio, setRadio] = useState(meetingType ? "VIRTUAL" : "IN_PERSON");
   const [date, setDate] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const onRadioChange = (e) => {
     const meetingType = e.target.value;
     setRadio(meetingType);
   };
 
-  const onSubmit = () => {
-    allocateDate({
+  const onSubmit = async () => {
+    setLoading(true);
+    await allocateDate({
       id,
       payload: {
         email: authorEmail,
@@ -22,6 +24,7 @@ const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, user
         date,
       },
     });
+    setLoading(false);
   };
 
   return (
@@ -50,7 +53,6 @@ const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, user
                   setDate(value.format());
                 }}
                 disabledDate={(current) => {
-                  console.log(current);
                   return current && current <= Date.now();
                 }}
               />
@@ -65,7 +67,7 @@ const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, user
         </div>
       </div>
       <div className="ListItem__select">
-        <Button loading={isLoading} onClick={onSubmit} disabled={!!date ? false : true}>
+        <Button loading={loading} onClick={onSubmit} disabled={!!date ? false : true}>
           {status === "PENDING" || status === "UNDER_PROCESS" ? "Change Date" : "Submit"}
         </Button>
       </div>
