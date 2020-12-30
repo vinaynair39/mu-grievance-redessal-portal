@@ -41,6 +41,10 @@
   font-weight: 600;
   color: #3f5366;
   margin-bottom: 1.5rem;
+  @include media("<tablet") {
+    justify-content: center;
+    margin-bottom: 2vh;
+  }
 }
 
 .ListItem__content-time {
@@ -50,7 +54,10 @@
   margin-bottom: 1px;
   @include media("<tablet") {
     align-self: center;
-    margin-bottom: 4vh;
+    margin-bottom: 2vh;
+    .ant-picker {
+      margin-top: 2vh;
+    }
   }
 }
 
@@ -61,6 +68,9 @@
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
     color: white;
+    @include media("<tablet") {
+      margin-right: 4vw;
+    }
   }
 }
 .ListItem__content-against {

@@ -6,12 +6,12 @@
   border-radius: 0.3rem;
   transition: all 0.3s ease;
   cursor: pointer;
-
   &:hover {
     transform: scale(1.02);
   }
-  @media screen and (max-width: 600px) {
-    margin: 1.5rem 2rem;
+  @include media("<tablet") {
+    margin: 2vh 0;
+    width: 100%;
   }
 
   .ant-page-header-heading-title {

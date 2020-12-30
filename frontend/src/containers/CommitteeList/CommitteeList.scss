@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  overflow: hidden;
   @media screen and (max-width: 700px) {
     flex-direction: column;
     justify-content: center;

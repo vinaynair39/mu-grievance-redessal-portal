@@ -42,7 +42,7 @@ export const Secretary = () => {
       <div className="NavBar__hamburger">
         <Hamburger color={"#fff"} rounded size={22} toggled={open} toggle={setOpen} />
       </div>
-      <Drawer placement="left" closable={true} onClose={() => setOpen(false)} visible={open}>
+      <Drawer placement="right" closable={true} onClose={() => setOpen(false)} visible={open}>
         <div className="Layout-logo">
           <img src={process.env.PUBLIC_URL + "/logo.png"} alt="" />
         </div>
@@ -58,8 +58,8 @@ export const Secretary = () => {
               <NavLink to="/secretary/processing">Meeting</NavLink>
             </Menu.Item>
           </SubMenu>
-          <Menu.Item icon={<TeamOutlined />} key="/secretary/committeesstyle" style={{ marginBottom: "4vh" }}>
-            <NavLink to="/secretary/committees">Committee</NavLink>
+          <Menu.Item icon={<TeamOutlined />} key="/secretary/committee" style={{ marginBottom: "4vh" }}>
+            <NavLink to="/secretary/committee">Committee</NavLink>
           </Menu.Item>
           <Menu.Item icon={<ContainerOutlined />} key="/secretary/statistics" style={{ marginBottom: "4vh" }}>
             <NavLink to="/secretary/statistics">Statistics</NavLink>
@@ -94,7 +94,7 @@ export const Committee = () => {
       <div className="NavBar__hamburger">
         <Hamburger color={"#fff"} rounded size={22} toggled={open} toggle={setOpen} />
       </div>
-      <Drawer placement="left" closable={true} onClose={() => setOpen(false)} visible={open}>
+      <Drawer placement="right" closable={true} onClose={() => setOpen(false)} visible={open}>
         <div className="Layout-logo">
           <img src={process.env.PUBLIC_URL + "/logo.png"} alt="" />
         </div>
@@ -135,7 +135,7 @@ export const Student = () => {
       <div className="NavBar__hamburger">
         <Hamburger color={"#fff"} rounded size={22} toggled={open} toggle={setOpen} />
       </div>{" "}
-      <Drawer placement="left" closable={true} onClose={() => setOpen(false)} visible={open}>
+      <Drawer placement="right" closable={true} onClose={() => setOpen(false)} visible={open}>
         <div className="Layout-logo">
           <img src={process.env.PUBLIC_URL + "/logo.png"} alt="" />
         </div>

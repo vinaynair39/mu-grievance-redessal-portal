@@ -7,7 +7,7 @@
   align-items: center;
   text-align: center;
   @include media("<tablet") {
-    height: 92vh;
+    height: 90vh;
     justify-content: flex-start;
     align-items: center;
   }
@@ -46,7 +46,6 @@
     .StudenntDashboardPage__button2 {
       height: 68vh;
       width: 38vw;
-
       position: relative;
       z-index: 2;
       top: -9vh;
@@ -54,7 +53,7 @@
       @include media("<tablet") {
         width: 100vw;
         height: 45vh;
-        position: static;
+        top: -2vh;
       }
       &:hover {
         transform: scale(1.1);

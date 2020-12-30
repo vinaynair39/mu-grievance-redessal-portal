@@ -28,7 +28,7 @@ const SelectedPage = () => {
         <Spinner />
       ) : (
         <div className="animate__animated animate__fadeIn">
-          <List grievances={data} allocateDate={allocateDateMutation} isLoading={allocateDateLoading} />}
+          <List grievances={data} allocateDate={allocateDateMutation} isLoading={allocateDateLoading} />
         </div>
       )}
     </Layout>
