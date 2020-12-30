@@ -1,5 +1,7 @@
 import request from "request";
 import dayjs from "dayjs";
+import createError from "http-errors";
+import DynamoDB from "aws-sdk/clients/dynamodb";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import utc from "dayjs/plugin/utc"; // dependent on utc plugin
 import timezone from "dayjs/plugin/timezone";
@@ -13,20 +15,26 @@ dayjs.extend(localizedFormat);
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
+const dynamodb = new DynamoDB.DocumentClient({
+  region: process.env.GRIEVANCE_SERVICE_AWS_REGION,
+});
+
 async function allocateDate(event, context) {
   const { id } = event.pathParameters;
-  const { token } = event.requestContext.authorizer;
+  const { token, userType } = event.requestContext.authorizer;
   let { meetingType, date } = event.body;
   const { title } = await getGrievanceById(id);
 
+  if (userType !== "SECRETARY") {
+    throw new createError.Unauthorized("Unauthorized!");
+  }
+
   let joinUrl = null;
   let startUrl = null;
+  const formattedDate = dayjs(date).tz("Asia/Kolkata").format("LLL");
 
-  let emailBody = `A Meeting has been scheduled on ${dayjs(date)
-    .tz("Asia/Kolkata")
-    .format(
-      "LLL"
-    )} for your grievance to be solved. You will have to come to Fort/Vidyanagari Campus of University of Mumbai/Vidyapeeth Vidyarthi Bhavan, ‘B’ Road, Churchgate, Mumbai`;
+  let studentEmailBody = `A Meeting has been scheduled on ${formattedDate} for your grievance to be solved. You will have to come to Fort/Vidyanagari Campus of University of Mumbai/Vidyapeeth Vidyarthi Bhavan, ‘B’ Road, Churchgate, Mumbai`;
+  let committeeEmailBody = `A Meeting has been scheduled on ${formattedDate} to solve grievance ${title}.`;
 
   if (meetingType.toUpperCase() === "VIRTUAL") {
     const options = {
@@ -57,9 +65,8 @@ async function allocateDate(event, context) {
 
     joinUrl = join_url;
     startUrl = start_url;
-    emailBody = `A Virtual Meeting has been scheduled on ${dayjs(date)
-      .tz("Asia/Kolkata")
-      .format("LLL")} for your grievance to be solved.The Meeting Link is ${join_url}.`;
+    studentEmailBody = `A Virtual Meeting has been scheduled on ${formattedDate} for your grievance to be solved. The Meeting Link is ${join_url}.`;
+    committeeEmailBody = `A Virtual Meeting has been scheduled on ${formattedDate} to solve grievance ${title}. The Meeting Link is ${join_url}.`;
   }
 
   const grievanceParams = {
@@ -83,11 +90,40 @@ async function allocateDate(event, context) {
 
   const { authorEmail } = await updateById(grievanceParams);
 
-  await sendMail({
-    subject: `Regarding your grievance ${title}`,
+  let committeeEmails;
+
+  const parmsForUserDB = {
+    TableName: process.env.USER_TABLE_NAME,
+    IndexName: "userTypeGSI",
+    KeyConditionExpression: "userType = :userType",
+    ExpressionAttributeValues: {
+      ":userType": "COMMITTEE",
+    },
+    ProjectionExpression: "email",
+  };
+
+  try {
+    const { Items } = await dynamodb.query(parmsForUserDB).promise();
+    committeeEmails = Items.map((ele) => ele.email);
+    console.log(committeeEmails);
+  } catch (error) {
+    console.error(error);
+    throw new createError.InternalServerError(error);
+  }
+
+  const studentMail = sendMail({
+    subject: `Regarding your grievance "${title}" - MU Grievance Redressal Cell`,
     email: authorEmail,
-    body: emailBody,
+    body: studentEmailBody,
   });
+
+  const committeeMails = sendMail({
+    subject: `Meeting information - MU Grievance Redressal Cell`,
+    email: committeeEmails,
+    body: committeeEmailBody,
+  });
+
+  await Promise.all([studentMail, committeeMails]);
 
   return {
     statusCode: 200,

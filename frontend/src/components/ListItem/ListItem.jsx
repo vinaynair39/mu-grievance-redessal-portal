@@ -50,7 +50,8 @@ const ListItem = ({ title, createdAt, id, status, authorEmail, meetingType, user
                   setDate(value.format());
                 }}
                 disabledDate={(current) => {
-                  return current && current < Date.now();
+                  console.log(current);
+                  return current && current <= Date.now();
                 }}
               />
             </div>

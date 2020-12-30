@@ -26,21 +26,41 @@ async function notifyNewGrievances(event, context) {
       "#status": "status",
     },
   };
+
+  const userParms = {
+    TableName: process.env.USER_TABLE_NAME,
+    IndexName: "userTypeGSI",
+    KeyConditionExpression: "userType = :userType",
+    ExpressionAttributeValues: {
+      ":userType": "SECRETARY",
+    },
+    ProjectionExpression: "email",
+  };
   try {
+    //fetching the grievances
     const { Items } = await dynamodb.query(params).promise();
+
+    //fetching the secretary email
+    const { Items: secretary } = await dynamodb.query(userParms).promise();
+    const secretaryEmail = secretary.map((ele) => ele.email);
+
+    //finding yesterday's date
     let yesterdaysDate = dayjs().subtract(1, "day");
     yesterdaysDate = dayjs(yesterdaysDate).tz("Asia/Kolkata").format("LLL");
+
+    //finding all the grievances whos createdAt property matches yesterday's date
     const yesterdaysGrievances = Items.filter(({ createdAt }) => {
       return yesterdaysDate === dayjs(createdAt).tz("Asia/Kolkata").format("LLL");
     });
+
     const previousGrievanceLength = Items.length - yesterdaysGrievances.length;
-    if (yesterdaysGrievances.length > 0 || previousGrievanceLength > 0)
+
+    if (yesterdaysGrievances.length > 0)
       await sendMail({
         subject: yesterdaysGrievances.length > 0 ? "New Grievances has been posted" : "Pending Grievances",
         body: `${yesterdaysGrievances.length} new grievances were posted yesterday. ${previousGrievanceLength} grievances were previously posted. You Login to the portal to view them`,
-        email: "vnnair39@gmail.com",
+        email: secretaryEmail,
       });
-
     return { notifyNewGrievances: yesterdaysGrievances.length, yesterdaysDate };
   } catch (error) {
     console.log(error);

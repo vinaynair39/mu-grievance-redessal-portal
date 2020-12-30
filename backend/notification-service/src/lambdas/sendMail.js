@@ -15,7 +15,7 @@ async function sendMail(event, context) {
   const params = {
     Source: "vnnair39@gmail.com",
     Destination: {
-      ToAddresses: [recipient],
+      ToAddresses: Array.isArray(recipient) ? recipient : [recipient],
     },
     Message: {
       Body: {
