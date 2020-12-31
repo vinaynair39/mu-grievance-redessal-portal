@@ -164,7 +164,7 @@ const Step2 = ({
               ]}
               className="form-label"
             >
-              <Input size="large" placeholder="Enter your Roll no here" size="large" />
+              <Input size="large" placeholder="Enter your Roll no here" />
             </Form.Item>
             <Form.Item label="Upload supporting documents for your grievance" className="form-label" listType="picture-card">
               <Upload

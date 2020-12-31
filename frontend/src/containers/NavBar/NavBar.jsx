@@ -61,6 +61,10 @@ export const Secretary = () => {
           <Menu.Item icon={<TeamOutlined />} key="/secretary/committee" style={{ marginBottom: "4vh" }}>
             <NavLink to="/secretary/committee">Committee</NavLink>
           </Menu.Item>
+          <Menu.Item icon={<TeamOutlined />} key="/secretary/completed" style={{ marginBottom: "4vh" }}>
+            <NavLink to="/secretary/completed">Completed</NavLink>
+          </Menu.Item>
+
           <Menu.Item icon={<ContainerOutlined />} key="/secretary/statistics" style={{ marginBottom: "4vh" }}>
             <NavLink to="/secretary/statistics">Statistics</NavLink>
           </Menu.Item>

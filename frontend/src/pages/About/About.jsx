@@ -8,7 +8,7 @@ import "./About.scss";
 const CommitteeCard = ({ imageUrl, name, designation }) => {
   return (
     <div className="CommitteeCard">
-      <img src={imageUrl} />
+      <img src={imageUrl} alt="" />
       <div className="info">
         <h2>{name}</h2>
         <p>{designation}</p>
