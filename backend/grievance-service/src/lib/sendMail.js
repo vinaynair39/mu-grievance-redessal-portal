@@ -18,6 +18,7 @@ export async function sendMail({ subject, email, body }) {
       })
       .promise();
   } catch (error) {
+    console.log(error);
     throw new createError.InternalServerError("some error occured while sending the mail to the queue");
   }
 }

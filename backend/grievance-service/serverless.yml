@@ -13,7 +13,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 256
-  stage: ${opt:stage, 'dev'}
   region: ap-south-1
   apiGateway:
     shouldStartNameWithService: true
@@ -184,7 +183,7 @@ functions:
       - schedule: cron(0 10 * * ? *)
 
 custom:
-  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${self:provider.stage}-auth
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${opt:stage}-auth
   GrievanceTable:
     name: !Ref GrievanceTable
     arn: !GetAtt GrievanceTable.Arn
@@ -192,14 +191,14 @@ custom:
     name: !Ref ContactsTable
     arn: !GetAtt ContactsTable.Arn
   UserTable:
-    arn: ${cf:mugs-user-service-${self:provider.stage}.UserTableArn}
-    name: ${cf:mugs-user-service-${self:provider.stage}.UserTableName}
+    arn: ${cf:mugs-user-service-${opt:stage}.UserTableArn}
+    name: ${cf:mugs-user-service-${opt:stage}.UserTableName}
   MailQueue:
-    arn: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueArn}
-    url: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueUrl}
+    arn: ${cf:mugs-notification-service-${opt:stage}.MailQueueArn}
+    url: ${cf:mugs-notification-service-${opt:stage}.MailQueueUrl}
 
   GrievanceBucket:
-    name: grievance-bucket-8282-${self:provider.stage}
+    name: grievance-bucket-8282-${opt:stage}
 
   export-env:
     filename: .env.test

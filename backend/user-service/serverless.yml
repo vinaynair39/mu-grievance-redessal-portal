@@ -15,7 +15,6 @@ provider:
   memorySize: 256
   apiGateway:
     shouldStartNameWithService: true
-  stage: ${opt:stage, 'dev'}
   region: ap-south-1
   environment:
     USER_TABLE_NAME: ${self:custom.UserTable.name}
@@ -129,12 +128,12 @@ custom:
     name: !Ref UserTable
     arn: !GetAtt UserTable.Arn
 
-  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${self:provider.stage}-auth
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:mugs-auth-service-${opt:stage}-auth
   MailQueue:
-    arn: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueArn}
-    url: ${cf:mugs-notification-service-${self:provider.stage}.MailQueueUrl}
+    arn: ${cf:mugs-notification-service-${opt:stage}.MailQueueArn}
+    url: ${cf:mugs-notification-service-${opt:stage}.MailQueueUrl}
   UserBucket:
-    name: user-bucket-8282-${self:provider.stage}
+    name: user-bucket-8282-${opt:stage}
 
   export-env:
     filename: .env.test

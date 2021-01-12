@@ -11,7 +11,6 @@ provider:
   name: aws
   runtime: nodejs12.x
   memorySize: 256
-  stage: ${opt:stage, 'dev'}
   region: ap-south-1
   iamRoleStatements:
     - ${file(iam/SendMailIAM.yml):SendMailIAM}
@@ -34,6 +33,6 @@ functions:
 
 custom:
   mailQueue:
-    name: Mugs-MailQueue-${self:provider.stage}
+    name: Mugs-MailQueue-${opt:stage}
     arn: !GetAtt MailQueue.Arn
     url: !Ref MailQueue

@@ -10,7 +10,6 @@ provider:
   memorySize: 128
   apiGateway:
     shouldStartNameWithService: true
-  stage: ${opt:stage, 'dev'}
   region: ap-south-1
   environment:
     ZOOM_API_KEY: ${file(./config/envVars.js):getEnvVars.ZOOM_API_KEY}
